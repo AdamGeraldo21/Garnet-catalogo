@@ -65,7 +65,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-ganet-ink pb-32 pt-28 text-white lg:min-h-[92vh]"
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-ganet-ink pb-32 pt-28 text-white lg:min-h-[92vh] lg:pt-36"
       onTouchStart={(e) => (toque.current = e.touches[0].clientX)}
       onTouchEnd={(e) => {
         const dx = e.changedTouches[0].clientX - (toque.current ?? 0)

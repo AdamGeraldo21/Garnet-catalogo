@@ -89,7 +89,7 @@ export default function Catalogo() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-24 pt-10 sm:px-6">
-        <div className="sticky top-16 z-30 -mx-4 bg-slate-50/90 px-4 py-3 backdrop-blur-md sm:-mx-6 sm:px-6 lg:top-20">
+        <div className="sticky top-[5rem] z-30 -mx-4 bg-slate-50/90 px-4 py-3 backdrop-blur-md sm:-mx-6 sm:px-6">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
             <label className="relative block lg:w-80">
               <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />

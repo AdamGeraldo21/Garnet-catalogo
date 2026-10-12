@@ -35,7 +35,7 @@ function Detalle({ producto }) {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-ganet-ink pb-10 pt-24 lg:pt-28">
+      <section className="relative overflow-hidden bg-ganet-ink pb-10 pt-24 lg:pt-36">
         <div className="absolute inset-0 bg-grid opacity-40" />
         <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-4 text-sm text-slate-400 sm:px-6">
           <Link to="/" className="hover:text-white">Inicio</Link>
@@ -50,7 +50,7 @@ function Detalle({ producto }) {
 
       <section className="mx-auto -mt-4 grid max-w-7xl gap-10 px-4 pb-20 sm:px-6 lg:grid-cols-[1.1fr_1fr]">
         {/* Vista previa */}
-        <div className="lg:sticky lg:top-24 lg:self-start">
+        <div className="lg:sticky lg:top-28 lg:self-start">
           <div className="group relative aspect-square overflow-hidden rounded-[2rem] bg-white shadow-2xl shadow-slate-900/10 ring-1 ring-slate-200">
             <VistaProducto
               producto={producto}
