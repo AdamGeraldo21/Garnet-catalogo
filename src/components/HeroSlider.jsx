@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Calculator, CheckCircle2, ChevronLeft, ChevronRight, ClipboardList } from 'lucide-react'
 import Mockup from './Mockup'
@@ -52,22 +52,25 @@ const DURACION = 7000
 export default function HeroSlider() {
   const { abrir } = useCotizacion()
   const [actual, setActual] = useState(0)
-  const [pausa, setPausa] = useState(false)
+  const toque = useRef(null)
   const s = SLIDES[actual]
 
   const ir = (n) => setActual((n + SLIDES.length) % SLIDES.length)
 
+  // Avanza solo, sin detenerse; cada cambio manual reinicia el temporizador.
   useEffect(() => {
-    if (pausa) return
     const t = setTimeout(() => ir(actual + 1), DURACION)
     return () => clearTimeout(t)
-  }, [actual, pausa])
+  }, [actual])
 
   return (
     <section
       className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-ganet-ink pb-32 pt-28 text-white lg:min-h-[92vh]"
-      onMouseEnter={() => setPausa(true)}
-      onMouseLeave={() => setPausa(false)}
+      onTouchStart={(e) => (toque.current = e.touches[0].clientX)}
+      onTouchEnd={(e) => {
+        const dx = e.changedTouches[0].clientX - (toque.current ?? 0)
+        if (Math.abs(dx) > 50) ir(actual + (dx < 0 ? 1 : -1))
+      }}
     >
       {/* Fondos con transición */}
       {SLIDES.map((sl, i) => (
@@ -81,7 +84,7 @@ export default function HeroSlider() {
       <div className="absolute -left-32 top-10 -z-10 h-96 w-96 animate-glow rounded-full bg-ganet-blue/30 blur-[120px]" />
       <div className="absolute -right-20 bottom-0 -z-10 h-80 w-80 animate-glow rounded-full bg-ganet-green/30 blur-[120px] [animation-delay:2s]" />
 
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr]">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 sm:px-6 md:px-20 2xl:px-6 lg:grid-cols-[1.05fr_1fr]">
         <div key={s.id}>
           <span className="inline-flex animate-fade-up items-center gap-2 rounded-full border border-ganet-cyan/30 bg-ganet-cyan/10 px-3 py-1 text-xs font-medium text-ganet-cyan backdrop-blur">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ganet-lime" />
@@ -117,32 +120,39 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* Controles */}
-      <div className="absolute inset-x-0 bottom-20 z-10 mx-auto flex max-w-7xl items-center gap-6 px-4 sm:bottom-24 sm:px-6">
+      {/* Flechas a los lados */}
+      {[
+        { dir: -1, Icono: ChevronLeft, lado: 'left-3 xl:left-8', label: 'Anterior' },
+        { dir: 1, Icono: ChevronRight, lado: 'right-3 xl:right-8', label: 'Siguiente' },
+      ].map(({ dir, Icono, lado, label }) => (
+        <button
+          key={dir}
+          onClick={() => ir(actual + dir)}
+          aria-label={label}
+          className={`group absolute top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-white/5 text-white backdrop-blur-md transition hover:border-ganet-cyan hover:bg-ganet-cyan hover:text-ganet-ink md:grid ${lado}`}
+        >
+          <Icono className="h-6 w-6 transition group-hover:scale-110" />
+        </button>
+      ))}
+
+      {/* Indicadores */}
+      <div className="absolute inset-x-0 bottom-20 z-10 mx-auto flex max-w-7xl items-center gap-6 px-4 sm:bottom-24 sm:px-6 md:px-20 2xl:px-6">
         <span className="font-display text-sm tabular-nums text-slate-400">
           <span className="text-lg font-bold text-white">{String(actual + 1).padStart(2, '0')}</span> / {String(SLIDES.length).padStart(2, '0')}
         </span>
         <div className="flex flex-1 gap-2">
           {SLIDES.map((sl, i) => (
-            <button key={sl.id} onClick={() => ir(i)} className="group relative h-1 flex-1 overflow-hidden rounded-full bg-white/15 sm:max-w-24" aria-label={`Ir a ${sl.etiqueta}`}>
+            <button key={sl.id} onClick={() => ir(i)} className="relative h-1 flex-1 overflow-hidden rounded-full bg-white/15 sm:max-w-24" aria-label={`Ir a ${sl.etiqueta}`}>
               {i < actual && <span className="absolute inset-0 bg-white/60" />}
               {i === actual && (
                 <span
-                  key={`${actual}-${pausa}`}
-                  className={`absolute inset-0 origin-left bg-gradient-to-r from-ganet-cyan to-ganet-lime ${pausa ? '' : 'animate-progreso'}`}
+                  key={actual}
+                  className="absolute inset-0 origin-left animate-progreso bg-gradient-to-r from-ganet-cyan to-ganet-lime"
                   style={{ animationDuration: `${DURACION}ms` }}
                 />
               )}
             </button>
           ))}
-        </div>
-        <div className="flex gap-2">
-          <button onClick={() => ir(actual - 1)} className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/5 backdrop-blur transition hover:bg-white/15" aria-label="Anterior">
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button onClick={() => ir(actual + 1)} className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/5 backdrop-blur transition hover:bg-white/15" aria-label="Siguiente">
-            <ChevronRight className="h-5 w-5" />
-          </button>
         </div>
       </div>
 

@@ -31,5 +31,4 @@ export const MARCA = {
     'Nuestro isotipo es una representación moderna y minimalista que encapsula la esencia de Ganet. La “G” dividida simboliza nuestra atención al detalle y el enfoque meticuloso que aplicamos en cada proyecto.',
   colores:
     'Tonos vibrantes que sugieren creatividad y energía, combinados con colores que transmiten confianza y estabilidad.',
-  paleta: ['#03E9FF', '#22BDFA', '#039EFF', '#7BB331', '#308527', '#05111D'],
 }

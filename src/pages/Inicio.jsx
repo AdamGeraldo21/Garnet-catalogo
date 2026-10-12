@@ -6,7 +6,7 @@ import ProductoCard from '../components/ProductoCard'
 import Mockup from '../components/Mockup'
 import Icono from '../components/Icono'
 import { Contador, Reveal, Titulo } from '../components/Animados'
-import { CATEGORIAS, COLORES, EMPRESA, PRODUCTOS, SERVICIOS } from '../data/catalogo'
+import { CATEGORIAS, COLORES, EMPRESA, PRODUCTOS, SERVICIOS, productoPorId } from '../data/catalogo'
 import { abrirWhatsapp, useCotizacion } from '../context/Cotizacion'
 
 export default function Inicio() {
@@ -41,35 +41,117 @@ function Cinta() {
   )
 }
 
+// Los artículos esenciales que se muestran en el carrusel del inicio.
+const ESENCIALES = ['of-01', 'te-01', 'po-01', 'pa-01', 'li-01', 'st-01']
+const INTERVALO = 3500
+
 function Destacados() {
+  const items = ESENCIALES.map(productoPorId).filter(Boolean)
+  const n = items.length
   const pista = useRef(null)
-  const destacados = PRODUCTOS.filter((p) => p.etiqueta === 'Más pedido' || p.etiqueta === 'Personalizable').slice(0, 10)
-  const mover = (dir) => pista.current?.scrollBy({ left: dir * pista.current.clientWidth * 0.8, behavior: 'smooth' })
+  const [i, setI] = useState(0)
+  const [animar, setAnimar] = useState(true)
+  const [paso, setPaso] = useState(0)
+
+  // Ancho de una tarjeta + separación, para desplazar la pista.
+  useEffect(() => {
+    const medir = () => {
+      const el = pista.current?.children[0]
+      if (el) setPaso(el.getBoundingClientRect().width + 24)
+    }
+    medir()
+    window.addEventListener('resize', medir)
+    return () => window.removeEventListener('resize', medir)
+  }, [])
+
+  // Avanza solo; cada movimiento (automático o manual) reinicia el temporizador.
+  useEffect(() => {
+    const t = setTimeout(() => setI((x) => x + 1), INTERVALO)
+    return () => clearTimeout(t)
+  }, [i])
+
+  // Al pasar a la copia, vuelve al original sin animación (el salto es invisible).
+  useEffect(() => {
+    if (i < n) return
+    const t = setTimeout(() => {
+      setAnimar(false)
+      setI((v) => (v >= n ? v - n : v))
+    }, 720)
+    return () => clearTimeout(t)
+  }, [i, n])
+
+  // Al reiniciar sin animación, se reactiva en el siguiente cuadro.
+  useEffect(() => {
+    if (animar) return
+    const r = requestAnimationFrame(() => requestAnimationFrame(() => setAnimar(true)))
+    return () => cancelAnimationFrame(r)
+  }, [animar])
+
+  const siguiente = () => setI((x) => Math.min(x + 1, 2 * n - 1))
+  const anterior = () => {
+    if (i > 0) return setI(i - 1)
+    // Desde la primera: salta a la copia sin animación y retrocede una.
+    setAnimar(false)
+    setI(n)
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      setAnimar(true)
+      setI(n - 1)
+    }))
+  }
 
   return (
-    <section className="bg-slate-50 py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 py-24">
+      <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-ganet-cyan/10 blur-3xl" />
+      <div className="absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-ganet-lime/10 blur-3xl" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
-          <Titulo etiqueta="Lo más pedido">Favoritos de nuestros clientes</Titulo>
-          <div className="flex items-center gap-3">
-            <Link to="/catalogo" className="group inline-flex items-center gap-2 text-sm font-semibold text-ganet-blue">
-              Ver catálogo completo <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-            </Link>
-            <button onClick={() => mover(-1)} className="grid h-11 w-11 place-items-center rounded-full bg-white shadow ring-1 ring-slate-200 transition hover:bg-ganet-ink hover:text-white" aria-label="Anterior">
-              <ChevronLeft className="h-5 w-5" />
+          <Titulo etiqueta="Lo más pedido">Lo esencial para tu empresa</Titulo>
+          <Link to="/catalogo" className="group inline-flex items-center gap-2 text-sm font-semibold text-ganet-blue">
+            Ver catálogo completo <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+          </Link>
+        </Reveal>
+
+        <Reveal retraso={100} className="relative mt-12">
+          <div className="overflow-hidden px-1 py-4">
+            <div
+              ref={pista}
+              className={`flex gap-6 ${animar ? 'transition-transform duration-700 ease-[cubic-bezier(.65,0,.35,1)]' : ''}`}
+              style={{ transform: `translateX(-${i * paso}px)` }}
+            >
+              {[...items, ...items].map((p, k) => (
+                <div key={`${p.id}-${k}`} className="w-[82%] shrink-0 sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-48px)/3)] xl:w-[calc((100%-72px)/4)]">
+                  <ProductoCard producto={p} className="h-full" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {[
+            { fn: anterior, Icono: ChevronLeft, lado: 'left-0 -translate-x-1/3 xl:-translate-x-1/2', label: 'Anterior' },
+            { fn: siguiente, Icono: ChevronRight, lado: 'right-0 translate-x-1/3 xl:translate-x-1/2', label: 'Siguiente' },
+          ].map(({ fn, Icono: I, lado, label }) => (
+            <button
+              key={label}
+              onClick={fn}
+              aria-label={label}
+              className={`absolute top-1/2 z-10 -mt-6 grid h-11 w-11 place-items-center rounded-full bg-white sm:-mt-7 sm:h-14 sm:w-14 text-ganet-ink shadow-xl shadow-slate-900/15 ring-1 ring-slate-200 transition hover:scale-110 hover:bg-ganet-ink hover:text-white ${lado}`}
+            >
+              <I className="h-6 w-6" />
             </button>
-            <button onClick={() => mover(1)} className="grid h-11 w-11 place-items-center rounded-full bg-white shadow ring-1 ring-slate-200 transition hover:bg-ganet-ink hover:text-white" aria-label="Siguiente">
-              <ChevronRight className="h-5 w-5" />
-            </button>
+          ))}
+
+          <div className="mt-6 flex justify-center gap-2">
+            {items.map((p, k) => (
+              <button
+                key={p.id}
+                onClick={() => setI(k)}
+                aria-label={p.nombre}
+                className={`h-2 rounded-full transition-all duration-500 ${i % n === k ? 'w-10 bg-gradient-to-r from-ganet-cyan to-ganet-blue' : 'w-2 bg-slate-300 hover:bg-slate-400'}`}
+              />
+            ))}
           </div>
         </Reveal>
-      </div>
-      <div ref={pista} className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-4 pb-6 sm:px-6 lg:px-[max(1.5rem,calc((100vw_-_80rem)/2_+_1.5rem))] scroll-px-4 lg:scroll-px-[max(1.5rem,calc((100vw_-_80rem)/2_+_1.5rem))]">
-        {destacados.map((p, i) => (
-          <Reveal key={p.id} retraso={i * 60} className="w-[78%] shrink-0 snap-start sm:w-[45%] lg:w-[23%]">
-            <ProductoCard producto={p} className="h-full" />
-          </Reveal>
-        ))}
       </div>
     </section>
   )

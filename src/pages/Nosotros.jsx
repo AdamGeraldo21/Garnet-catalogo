@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Check, Copy, Eye, Rocket } from 'lucide-react'
+import { ArrowRight, Eye, Rocket } from 'lucide-react'
 import Icono from '../components/Icono'
 import { Contador, PageHeader, Reveal, Titulo } from '../components/Animados'
 import isotipo from '../assets/logo-mark.png'
@@ -137,13 +136,6 @@ export default function Nosotros() {
 }
 
 function NuestraMarca() {
-  const [copiado, setCopiado] = useState('')
-  const copiar = (hex) => {
-    navigator.clipboard?.writeText(hex)
-    setCopiado(hex)
-    setTimeout(() => setCopiado(''), 1500)
-  }
-
   return (
     <section className="relative isolate overflow-hidden bg-ganet-ink py-24 text-white">
       <div className="absolute inset-0 -z-10 bg-grid opacity-50" />
@@ -163,17 +155,6 @@ function NuestraMarca() {
           </Titulo>
           <p className="mt-5 leading-relaxed text-slate-300">{MARCA.isotipo}</p>
           <p className="mt-4 leading-relaxed text-slate-400">{MARCA.colores}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {MARCA.paleta.map((hex) => (
-              <button key={hex} onClick={() => copiar(hex)} className="group text-left" title="Copiar color">
-                <span className="block h-16 w-16 rounded-2xl ring-1 ring-white/20 transition group-hover:-translate-y-1 group-hover:scale-105" style={{ background: hex }} />
-                <span className="mt-2 flex items-center gap-1 font-mono text-[11px] text-slate-400">
-                  {copiado === hex ? <Check className="h-3 w-3 text-ganet-lime" /> : <Copy className="h-3 w-3 opacity-0 transition group-hover:opacity-100" />}
-                  {hex}
-                </span>
-              </button>
-            ))}
-          </div>
         </Reveal>
       </div>
     </section>
