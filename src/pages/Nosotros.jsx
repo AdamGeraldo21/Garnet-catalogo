@@ -57,13 +57,13 @@ export default function Nosotros() {
           { icono: Eye, titulo: 'Visión', texto: VISION, clase: 'from-ganet-green to-ganet-lime' },
         ].map(({ icono: I, titulo, texto, clase }, i) => (
           <Reveal key={titulo} retraso={i * 120}>
-            <div className="group relative h-full overflow-hidden rounded-[2rem] bg-ganet-ink p-8 text-white sm:p-10">
-              <div className={`absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gradient-to-br ${clase} opacity-30 blur-2xl transition duration-700 group-hover:scale-125`} />
-              <span className={`relative grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br ${clase} shadow-lg`}>
+            <div className="group relative h-full overflow-hidden rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200 transition hover:shadow-xl sm:p-10">
+              <div className={`absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gradient-to-br ${clase} opacity-15 blur-2xl transition duration-700 group-hover:scale-125`} />
+              <span className={`relative grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br ${clase} text-white shadow-lg`}>
                 <I className="h-6 w-6" />
               </span>
-              <h3 className="relative mt-6 font-display text-2xl font-bold">{titulo}</h3>
-              <p className="relative mt-3 leading-relaxed text-slate-300">{texto}</p>
+              <h3 className="relative mt-6 font-display text-2xl font-bold text-ganet-ink">{titulo}</h3>
+              <p className="relative mt-3 leading-relaxed text-slate-600">{texto}</p>
             </div>
           </Reveal>
         ))}
@@ -115,17 +115,17 @@ export default function Nosotros() {
 
       {/* Fundador */}
       <section className="px-4 pb-24 sm:px-6">
-        <Reveal className="relative mx-auto grid max-w-5xl items-center gap-10 overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-ganet-ink to-ganet-deep p-8 text-white sm:p-12 md:grid-cols-[auto_1fr]">
-          <div className="absolute inset-0 bg-grid opacity-40" />
+        <Reveal className="relative mx-auto grid max-w-5xl items-center gap-10 overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#EAF4FB] via-white to-[#EEF6E8] p-8 text-ganet-ink ring-1 ring-slate-200 sm:p-12 md:grid-cols-[auto_1fr]">
+          <div className="absolute inset-0 bg-grid opacity-60" />
           <img src={sello} alt="Sello Ganet" className="relative mx-auto w-40 animate-[orbit_30s_linear_infinite] opacity-90 sm:w-52" />
           <div className="relative">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ganet-lime">Fundador</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ganet-green">Fundador</p>
             <h3 className="mt-2 font-display text-3xl font-bold">{EMPRESA.ceo}</h3>
-            <p className="text-ganet-sky">CEO & Founder</p>
-            <p className="mt-5 text-lg leading-relaxed text-slate-300">
+            <p className="text-ganet-blue">CEO & Founder</p>
+            <p className="mt-5 text-lg leading-relaxed text-slate-600">
               Al frente de Ganet, impulsa una empresa pensada para que cada cliente tenga un aliado que entienda sus necesidades y cuide cada detalle, desde una resma de papel hasta sus estados financieros.
             </p>
-            <Link to="/contacto" className="group mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-ganet-ink transition hover:bg-ganet-cyan">
+            <Link to="/contacto" className="group mt-7 inline-flex items-center gap-2 rounded-full bg-ganet-ink px-6 py-3 font-semibold text-white transition hover:bg-ganet-blue">
               Hablemos <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </Link>
           </div>

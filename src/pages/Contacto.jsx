@@ -86,14 +86,14 @@ export default function Contacto() {
         <div className="space-y-4">
           {datos.map(({ icono: I, label, valor, href }, i) => (
             <Reveal key={label} retraso={i * 80}>
-              <div className="group flex items-center gap-4 rounded-2xl bg-ganet-ink p-5 text-white transition hover:-translate-y-0.5">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-ganet-cyan to-ganet-blue text-ganet-ink transition group-hover:rotate-6">
+              <div className="group flex items-center gap-4 rounded-2xl bg-white p-5 text-ganet-ink shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-lg">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-ganet-cyan to-ganet-blue text-white transition group-hover:rotate-6">
                   <I className="h-5 w-5" />
                 </span>
                 <div className="min-w-0">
                   <p className="text-xs uppercase tracking-wider text-slate-400">{label}</p>
                   {href ? (
-                    <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="break-words font-medium hover:text-ganet-cyan">{valor}</a>
+                    <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="break-words font-medium hover:text-ganet-blue">{valor}</a>
                   ) : (
                     <p className="font-medium">{valor}</p>
                   )}

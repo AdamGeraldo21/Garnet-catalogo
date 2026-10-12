@@ -6,9 +6,9 @@ export default {
       colors: {
         ganet: {
           // Versiones suavizadas de la paleta del manual (menos saturadas y fondos menos oscuros).
-          ink: '#10243A',
-          night: '#16304A',
-          deep: '#1B3A58',
+          ink: '#1A3552',
+          night: '#203E5D',
+          deep: '#274968',
           blue: '#2F8FDB',
           sky: '#4AB4E6',
           cyan: '#5CD3E6',

@@ -42,9 +42,9 @@ export default function Personaliza() {
       />
 
       <section className="relative z-10 mx-auto -mt-10 max-w-7xl px-4 pb-16 sm:px-6">
-        <div className="grid grid-cols-1 overflow-hidden rounded-[2rem] bg-ganet-ink shadow-2xl shadow-slate-900/20 lg:grid-cols-[200px_minmax(0,1fr)_380px] [&>*]:min-w-0">
+        <div className="grid grid-cols-1 overflow-hidden rounded-[2rem] bg-white shadow-2xl shadow-slate-900/10 ring-1 ring-slate-200 lg:grid-cols-[200px_minmax(0,1fr)_380px] [&>*]:min-w-0">
           {/* Selector de producto: en escritorio ocupa el alto de la fila y se desplaza */}
-          <div className="relative border-b border-white/10 lg:border-b-0 lg:border-r">
+          <div className="relative border-b border-slate-200 bg-slate-50/70 lg:border-b-0 lg:border-r">
           <div className="no-scrollbar flex gap-2 overflow-x-auto p-3 lg:absolute lg:inset-0 lg:flex-col lg:overflow-y-auto">
             {PERSONALIZABLES.map((p) => {
               const activo = p.id === producto.id
@@ -52,9 +52,9 @@ export default function Personaliza() {
                 <button
                   key={p.id}
                   onClick={() => elegir(p)}
-                  className={`flex shrink-0 items-center gap-3 rounded-2xl p-2 pr-3 text-left transition ${activo ? 'bg-white text-ganet-ink' : 'text-slate-300 hover:bg-white/10'}`}
+                  className={`flex shrink-0 items-center gap-3 rounded-2xl p-2 pr-3 text-left transition ${activo ? 'bg-white text-ganet-ink shadow-md ring-1 ring-ganet-sky/40' : 'text-slate-600 hover:bg-white hover:text-ganet-ink'}`}
                 >
-                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-xl ${activo ? 'bg-slate-100' : 'bg-white/5'}`}>
+                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-xl ${activo ? 'bg-sky-50' : 'bg-white ring-1 ring-slate-200'}`}>
                     <Mockup tipo={p.mockup} color={coloresDe(p)[activo ? coloresDe(p).findIndex((c) => c.hex === estado.color.hex) : 0]?.hex || estado.color.hex} usarIsotipo={false} className="h-11 w-11" />
                   </span>
                   <span className="text-sm font-medium leading-tight">{p.nombre}</span>
@@ -69,21 +69,21 @@ export default function Personaliza() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(34,189,250,.25),transparent_60%)]" />
             <div className="absolute left-1/2 top-1/2 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl transition-colors duration-700" style={{ background: `${estado.color.hex}40` }} />
             <Mockup key={producto.id} tipo={producto.mockup} color={estado.color.hex} {...propsMockup(estado)} className="relative w-full max-w-md animate-fade-up drop-shadow-xl" />
-            <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-ganet-ink/85 px-3 py-1.5 text-xs font-medium text-white backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5 text-ganet-cyan" /> {producto.nombre} · {estado.color.nombre}
+            <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium text-ganet-ink shadow-sm ring-1 ring-slate-200 backdrop-blur">
+              <Sparkles className="h-3.5 w-3.5 text-ganet-blue" /> {producto.nombre} · {estado.color.nombre}
             </div>
           </div>
 
           {/* Controles */}
-          <div className="flex flex-col gap-6 p-6 sm:p-7">
+          <div className="flex flex-col gap-6 border-t border-slate-200 p-6 sm:p-7 lg:border-l lg:border-t-0">
             <div>
               <p className="text-xs uppercase tracking-widest text-slate-500">Producto</p>
-              <h2 className="mt-1 font-display text-xl font-bold text-white">{producto.nombre}</h2>
-              <Link to={`/producto/${producto.id}`} className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-ganet-cyan hover:underline">
+              <h2 className="mt-1 font-display text-xl font-bold text-ganet-ink">{producto.nombre}</h2>
+              <Link to={`/producto/${producto.id}`} className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-ganet-blue hover:underline">
                 Ver ficha completa <ArrowRight className="h-3 w-3" />
               </Link>
             </div>
-            <ControlesPersonalizacion producto={producto} estado={estado} set={set} oscuro />
+            <ControlesPersonalizacion producto={producto} estado={estado} set={set} />
             <button
               onClick={() => agregar(producto, 1, detallesCotizacion(estado, producto.opciones?.[0] || ''))}
               className="mt-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-ganet-cyan to-ganet-blue px-6 py-3.5 font-semibold text-ganet-ink shadow-lg shadow-ganet-blue/25 transition hover:brightness-110"
