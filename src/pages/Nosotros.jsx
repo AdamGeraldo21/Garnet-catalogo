@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Eye, Rocket } from 'lucide-react'
 import Icono from '../components/Icono'
+import AnatomiaMarca from '../components/AnatomiaMarca'
 import { Contador, PageHeader, Reveal, Titulo } from '../components/Animados'
 import isotipo from '../assets/logo-mark.png'
 import sello from '../assets/sello.png'
 import { CATEGORIAS, EMPRESA, PRODUCTOS, SERVICIOS } from '../data/catalogo'
-import { MARCA, MISION, POR_QUE, QUIENES_SOMOS, VALORES, VISION } from '../data/nosotros'
+import { MISION, POR_QUE, QUIENES_SOMOS, VALORES, VISION } from '../data/nosotros'
 
 export default function Nosotros() {
   return (
@@ -91,7 +92,7 @@ export default function Nosotros() {
         </div>
       </section>
 
-      <NuestraMarca />
+      <AnatomiaMarca />
 
       {/* Por qué elegirnos */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
@@ -132,31 +133,5 @@ export default function Nosotros() {
         </Reveal>
       </section>
     </>
-  )
-}
-
-function NuestraMarca() {
-  return (
-    <section className="relative isolate overflow-hidden bg-ganet-ink py-24 text-white">
-      <div className="absolute inset-0 -z-10 bg-grid opacity-50" />
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2">
-        <Reveal className="relative mx-auto aspect-square w-full max-w-md">
-          <div className="absolute inset-0 animate-orbit rounded-full border border-dashed border-ganet-sky/30" />
-          <div className="absolute inset-[12%] animate-orbit-rev rounded-full border border-ganet-lime/20" />
-          <div className="absolute inset-[28%] animate-glow rounded-full bg-ganet-blue/15 blur-3xl" />
-          <div className="absolute inset-0 grid place-items-center">
-            <img src={isotipo} alt="Isotipo Ganet" className="w-[48%] animate-float drop-shadow-[0_0_50px_rgba(92,211,230,0.3)]" />
-          </div>
-        </Reveal>
-
-        <Reveal retraso={120}>
-          <Titulo etiqueta="Nuestra marca" oscuro>
-            Una “G” con <span className="text-gradient">significado</span>
-          </Titulo>
-          <p className="mt-5 leading-relaxed text-slate-300">{MARCA.isotipo}</p>
-          <p className="mt-4 leading-relaxed text-slate-400">{MARCA.colores}</p>
-        </Reveal>
-      </div>
-    </section>
   )
 }

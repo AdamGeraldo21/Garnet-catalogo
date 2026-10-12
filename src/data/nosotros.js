@@ -25,10 +25,34 @@ export const POR_QUE = [
   { icono: 'MessageCircle', titulo: 'Respuesta rápida', texto: 'Cotiza por WhatsApp y recibe tu propuesta sin vueltas.' },
 ]
 
-// Del manual de marca
+// Del manual de marca: anatomía del isotipo
 export const MARCA = {
-  isotipo:
-    'Nuestro isotipo es una representación moderna y minimalista que encapsula la esencia de Ganet. La “G” dividida simboliza nuestra atención al detalle y el enfoque meticuloso que aplicamos en cada proyecto.',
-  colores:
-    'Tonos vibrantes que sugieren creatividad y energía, combinados con colores que transmiten confianza y estabilidad.',
+  intro:
+    'Nuestro isotipo es una representación moderna y minimalista que encapsula la esencia de Ganet. Cada parte de la “G” tiene un significado.',
+  partes: [
+    {
+      id: 'curva',
+      titulo: 'Confianza y estabilidad',
+      etiqueta: 'La curva azul',
+      texto: 'Los tonos azules de la “G” transmiten la confianza y estabilidad con la que acompañamos a cada cliente.',
+    },
+    {
+      id: 'barra',
+      titulo: 'Creatividad y energía',
+      etiqueta: 'La barra verde',
+      texto: 'Un acento vibrante que sugiere creatividad y energía: ideas frescas para que tu marca destaque.',
+    },
+    {
+      id: 'corte',
+      titulo: 'Atención al detalle',
+      etiqueta: 'La G dividida',
+      texto: 'La separación precisa de la “G” simboliza el enfoque meticuloso que aplicamos en cada proyecto.',
+    },
+    {
+      id: 'geometria',
+      titulo: 'Simetría y geometría',
+      etiqueta: 'Construcción',
+      texto: 'Proporciones trazadas con precisión geométrica: un diseño moderno, ordenado y fácil de recordar.',
+    },
+  ],
 }
