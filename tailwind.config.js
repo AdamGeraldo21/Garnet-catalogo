@@ -36,6 +36,23 @@ export default {
           from: { opacity: 0, transform: 'translateY(18px)' },
           to: { opacity: 1, transform: 'translateY(0)' },
         },
+        pagina: {
+          from: { opacity: 0, transform: 'translateY(10px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
+        kenburns: {
+          from: { transform: 'scale(1.02) translate(0, 0)' },
+          to: { transform: 'scale(1.14) translate(-1.5%, -1%)' },
+        },
+        progreso: {
+          from: { transform: 'scaleX(0)' },
+          to: { transform: 'scaleX(1)' },
+        },
+        barra: {
+          '0%': { transform: 'scaleY(.25)' },
+          '50%': { transform: 'scaleY(1)' },
+          '100%': { transform: 'scaleY(.6)' },
+        },
         pulseGlow: {
           '0%, 100%': { opacity: 0.55, transform: 'scale(1)' },
           '50%': { opacity: 0.9, transform: 'scale(1.08)' },
@@ -48,6 +65,11 @@ export default {
         'orbit-rev': 'orbit 40s linear infinite reverse',
         'fade-up': 'fadeUp .6s ease-out both',
         glow: 'pulseGlow 5s ease-in-out infinite',
+        pagina: 'pagina .45s ease-out both',
+        kenburns: 'kenburns 9s ease-out both',
+        progreso: 'progreso linear both',
+        barra: 'barra 2.4s ease-in-out infinite alternate',
+        'float-lento': 'float 9s ease-in-out infinite',
       },
     },
   },

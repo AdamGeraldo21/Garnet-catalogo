@@ -4,6 +4,7 @@ import {
   HardHat, KeyRound, Landmark, LayoutGrid, Layers, NotebookPen, Paperclip, Pencil,
   PencilRuler, PenLine, PenTool, Printer, Scissors, ScrollText, Shirt, ShieldCheck,
   ShoppingBag, Sparkles, SprayCan, Sticker, Store, Tag, Package,
+  Target, Handshake, Lightbulb, Zap, Boxes, Palette, Truck, MessageCircle,
 } from 'lucide-react'
 
 const ICONOS = {
@@ -12,6 +13,7 @@ const ICONOS = {
   HardHat, KeyRound, Landmark, LayoutGrid, Layers, NotebookPen, Paperclip, Pencil,
   PencilRuler, PenLine, PenTool, Printer, Scissors, ScrollText, Shirt, ShieldCheck,
   ShoppingBag, Sparkles, SprayCan, Sticker, Store, Tag,
+  Target, Handshake, Lightbulb, Zap, Boxes, Palette, Truck, MessageCircle,
 }
 
 export default function Icono({ nombre, ...props }) {
