@@ -65,7 +65,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-ganet-ink pb-32 pt-28 text-white lg:min-h-[92vh] lg:pt-36"
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-ganet-ink pb-24 pt-28 text-white lg:min-h-[92vh] lg:pt-36"
       onTouchStart={(e) => (toque.current = e.touches[0].clientX)}
       onTouchEnd={(e) => {
         const dx = e.changedTouches[0].clientX - (toque.current ?? 0)
@@ -134,27 +134,6 @@ export default function HeroSlider() {
           <Icono className="h-6 w-6 transition group-hover:scale-110" />
         </button>
       ))}
-
-      {/* Indicadores */}
-      <div className="absolute inset-x-0 bottom-20 z-10 mx-auto flex max-w-7xl items-center gap-6 px-4 sm:bottom-24 sm:px-6 md:px-20 2xl:px-6">
-        <span className="font-display text-sm tabular-nums text-slate-400">
-          <span className="text-lg font-bold text-white">{String(actual + 1).padStart(2, '0')}</span> / {String(SLIDES.length).padStart(2, '0')}
-        </span>
-        <div className="flex flex-1 gap-2">
-          {SLIDES.map((sl, i) => (
-            <button key={sl.id} onClick={() => ir(i)} className="relative h-1 flex-1 overflow-hidden rounded-full bg-white/15 sm:max-w-24" aria-label={`Ir a ${sl.etiqueta}`}>
-              {i < actual && <span className="absolute inset-0 bg-white/60" />}
-              {i === actual && (
-                <span
-                  key={actual}
-                  className="absolute inset-0 origin-left animate-progreso bg-gradient-to-r from-ganet-cyan to-ganet-lime"
-                  style={{ animationDuration: `${DURACION}ms` }}
-                />
-              )}
-            </button>
-          ))}
-        </div>
-      </div>
 
       <svg className="absolute inset-x-0 bottom-0 h-14 w-full text-slate-50 sm:h-20" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden>
         <path fill="currentColor" d="M0,64 C360,120 1080,0 1440,56 L1440,100 L0,100 Z" />
