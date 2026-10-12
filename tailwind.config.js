@@ -5,14 +5,15 @@ export default {
     extend: {
       colors: {
         ganet: {
-          ink: '#05111D',
-          night: '#0a1a2b',
-          deep: '#0e2236',
-          blue: '#039EFF',
-          sky: '#22BDFA',
-          cyan: '#03E9FF',
-          lime: '#7BB331',
-          green: '#308527',
+          // Versiones suavizadas de la paleta del manual (menos saturadas y fondos menos oscuros).
+          ink: '#10243A',
+          night: '#16304A',
+          deep: '#1B3A58',
+          blue: '#2F8FDB',
+          sky: '#4AB4E6',
+          cyan: '#5CD3E6',
+          lime: '#8DBB57',
+          green: '#43884A',
         },
       },
       fontFamily: {

@@ -44,7 +44,7 @@ export default function Nosotros() {
             <img src="./img/productos/st-01.webp" alt="" className="aspect-square w-full rounded-[2rem] object-cover shadow-xl" />
             <img src="./img/productos/po-02.webp" alt="" className="aspect-square w-full rounded-[2rem] object-cover shadow-xl" />
           </div>
-          <div className="absolute -bottom-6 left-1/2 grid h-24 w-24 -translate-x-1/2 animate-float-lento place-items-center rounded-3xl bg-ganet-ink shadow-2xl shadow-ganet-blue/30">
+          <div className="absolute -bottom-6 left-1/2 grid h-24 w-24 -translate-x-1/2 animate-float-lento place-items-center rounded-3xl bg-ganet-ink shadow-2xl shadow-ganet-blue/20">
             <img src={isotipo} alt="" className="h-14 w-auto" />
           </div>
         </Reveal>
@@ -143,9 +143,9 @@ function NuestraMarca() {
         <Reveal className="relative mx-auto aspect-square w-full max-w-md">
           <div className="absolute inset-0 animate-orbit rounded-full border border-dashed border-ganet-sky/30" />
           <div className="absolute inset-[12%] animate-orbit-rev rounded-full border border-ganet-lime/20" />
-          <div className="absolute inset-[28%] animate-glow rounded-full bg-ganet-blue/30 blur-3xl" />
+          <div className="absolute inset-[28%] animate-glow rounded-full bg-ganet-blue/15 blur-3xl" />
           <div className="absolute inset-0 grid place-items-center">
-            <img src={isotipo} alt="Isotipo Ganet" className="w-[48%] animate-float drop-shadow-[0_0_50px_rgba(3,233,255,0.5)]" />
+            <img src={isotipo} alt="Isotipo Ganet" className="w-[48%] animate-float drop-shadow-[0_0_50px_rgba(92,211,230,0.3)]" />
           </div>
         </Reveal>
 

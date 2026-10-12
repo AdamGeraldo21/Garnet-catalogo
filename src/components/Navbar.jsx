@@ -104,7 +104,7 @@ export default function Navbar() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={abrir}
-                  className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-ganet-cyan to-ganet-blue px-4 py-2.5 text-sm font-semibold text-ganet-ink shadow-lg shadow-ganet-blue/30 transition hover:shadow-ganet-cyan/50"
+                  className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-ganet-cyan to-ganet-blue px-4 py-2.5 text-sm font-semibold text-ganet-ink shadow-lg shadow-ganet-blue/20 transition hover:shadow-ganet-cyan/50"
                 >
                   <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                   <ClipboardList className="relative h-4 w-4" />
@@ -176,7 +176,7 @@ function Enlaces({ pathname, menuAbierto, setMenu }) {
           className="absolute top-1 h-[calc(100%-0.5rem)] rounded-full bg-white/10 ring-1 ring-white/15 transition-all duration-300 ease-out"
           style={{ left: ind.left, width: ind.width }}
         >
-          <span className="absolute inset-x-4 -bottom-1 h-0.5 rounded-full bg-gradient-to-r from-ganet-cyan to-ganet-lime shadow-[0_0_10px_rgba(3,233,255,0.8)]" />
+          <span className="absolute inset-x-4 -bottom-1 h-0.5 rounded-full bg-gradient-to-r from-ganet-cyan to-ganet-lime shadow-[0_0_10px_rgba(92,211,230,0.5)]" />
         </span>
       )}
       {LINKS.map((l) => {
@@ -253,8 +253,8 @@ function MenuMovil({ abierto, cerrar, pathname }) {
     <div className={`fixed inset-0 z-50 lg:hidden ${abierto ? '' : 'pointer-events-none'}`} aria-hidden={!abierto}>
       <div className={`absolute inset-0 bg-ganet-ink transition-opacity duration-500 ${abierto ? 'opacity-100' : 'opacity-0'}`}>
         <div className="absolute inset-0 bg-grid opacity-40" />
-        <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-ganet-blue/30 blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-ganet-green/25 blur-3xl" />
+        <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-ganet-blue/15 blur-3xl" />
+        <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-ganet-green/15 blur-3xl" />
       </div>
 
       <div className={`relative flex h-full flex-col px-5 pb-8 pt-4 transition-all duration-500 ${abierto ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>

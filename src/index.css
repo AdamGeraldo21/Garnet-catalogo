@@ -22,8 +22,8 @@ body {
   }
   .bg-grid {
     background-image:
-      linear-gradient(rgba(34, 189, 250, 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(34, 189, 250, 0.07) 1px, transparent 1px);
+      linear-gradient(rgba(74, 180, 230, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74, 180, 230, 0.06) 1px, transparent 1px);
     background-size: 44px 44px;
   }
   .bg-dots {

@@ -81,8 +81,8 @@ export default function HeroSlider() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ganet-ink via-ganet-ink/90 to-ganet-ink/55" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ganet-ink via-transparent to-ganet-ink/60" />
       <div className="absolute inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_at_center,#000_30%,transparent_75%)]" />
-      <div className="absolute -left-32 top-10 -z-10 h-96 w-96 animate-glow rounded-full bg-ganet-blue/30 blur-[120px]" />
-      <div className="absolute -right-20 bottom-0 -z-10 h-80 w-80 animate-glow rounded-full bg-ganet-green/30 blur-[120px] [animation-delay:2s]" />
+      <div className="absolute -left-32 top-10 -z-10 h-96 w-96 animate-glow rounded-full bg-ganet-blue/15 blur-[120px]" />
+      <div className="absolute -right-20 bottom-0 -z-10 h-80 w-80 animate-glow rounded-full bg-ganet-green/15 blur-[120px] [animation-delay:2s]" />
 
       <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 sm:px-6 md:px-20 2xl:px-6 lg:grid-cols-[1.05fr_1fr]">
         <div key={s.id}>
@@ -98,7 +98,7 @@ export default function HeroSlider() {
           <div className="mt-9 flex animate-fade-up flex-wrap gap-3 [animation-delay:240ms]">
             <Link
               to={s.cta.to}
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-ganet-cyan to-ganet-blue px-6 py-3.5 font-semibold text-ganet-ink shadow-xl shadow-ganet-blue/30 transition hover:brightness-110"
+              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-ganet-cyan to-ganet-blue px-6 py-3.5 font-semibold text-ganet-ink shadow-xl shadow-ganet-blue/20 transition hover:brightness-110"
             >
               {s.cta.label}
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
@@ -158,8 +158,8 @@ function Collage({ fotos }) {
         </div>
       ))}
       <div className="absolute inset-0 grid place-items-center">
-        <div className="grid h-24 w-24 animate-fade-up place-items-center rounded-3xl border border-white/20 bg-ganet-ink/70 shadow-2xl shadow-ganet-cyan/30 backdrop-blur-xl [animation-delay:500ms]">
-          <img src={isotipo} alt="" className="h-14 w-auto drop-shadow-[0_0_20px_rgba(3,233,255,0.6)]" />
+        <div className="grid h-24 w-24 animate-fade-up place-items-center rounded-3xl border border-white/20 bg-ganet-ink/70 shadow-2xl shadow-ganet-cyan/20 backdrop-blur-xl [animation-delay:500ms]">
+          <img src={isotipo} alt="" className="h-14 w-auto drop-shadow-[0_0_20px_rgba(92,211,230,0.4)]" />
         </div>
       </div>
     </>

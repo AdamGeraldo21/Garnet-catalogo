@@ -183,7 +183,7 @@ function PersonalizaEnVivo() {
     <section className="relative isolate overflow-hidden bg-ganet-ink py-24 text-white">
       <div className="absolute inset-0 -z-10 bg-grid opacity-60" />
       <div className="absolute -right-32 top-10 -z-10 h-[30rem] w-[30rem] rounded-full blur-[140px] transition-colors duration-700" style={{ background: `${color.hex}55` }} />
-      <div className="absolute -left-20 bottom-0 -z-10 h-80 w-80 rounded-full bg-ganet-blue/25 blur-[120px]" />
+      <div className="absolute -left-20 bottom-0 -z-10 h-80 w-80 rounded-full bg-ganet-blue/15 blur-[120px]" />
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2">
         <Reveal>
@@ -232,7 +232,7 @@ function PersonalizaEnVivo() {
 
           <Link
             to="/personaliza"
-            className="group mt-9 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-ganet-cyan to-ganet-blue px-6 py-3.5 font-semibold text-ganet-ink shadow-xl shadow-ganet-blue/30 transition hover:brightness-110"
+            className="group mt-9 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-ganet-cyan to-ganet-blue px-6 py-3.5 font-semibold text-ganet-ink shadow-xl shadow-ganet-blue/20 transition hover:brightness-110"
           >
             Abrir el estudio de personalización
             <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
@@ -379,19 +379,20 @@ function LlamadoFinal() {
   const { abrir } = useCotizacion()
   return (
     <section className="px-4 pb-24 sm:px-6">
-      <Reveal className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-ganet-blue via-ganet-sky to-ganet-cyan p-10 text-ganet-ink sm:p-16">
-        <div className="absolute inset-0 bg-dots opacity-30" />
-        <span className="pointer-events-none absolute -right-10 -top-24 select-none font-display text-[18rem] font-extrabold leading-none text-white/20">G</span>
+      <Reveal className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#E7F3FB] via-[#EAF7FA] to-[#EEF6E6] p-10 text-ganet-ink ring-1 ring-ganet-sky/20 sm:p-16">
+        <div className="absolute -right-16 -top-16 h-72 w-72 rounded-full bg-ganet-sky/15 blur-3xl" />
+        <div className="absolute -bottom-20 left-1/3 h-64 w-64 rounded-full bg-ganet-lime/15 blur-3xl" />
+        <span className="pointer-events-none absolute -right-10 -top-24 select-none font-display text-[18rem] font-extrabold leading-none text-ganet-sky/10">G</span>
         <div className="relative max-w-2xl">
           <h2 className="font-display text-3xl font-extrabold sm:text-5xl">¿Listo para equipar tu empresa?</h2>
-          <p className="mt-4 text-lg text-ganet-ink/80">Arma tu cotización en minutos o escríbenos directamente. Te respondemos rápido.</p>
+          <p className="mt-4 text-lg text-slate-600">Arma tu cotización en minutos o escríbenos directamente. Te respondemos rápido.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <button onClick={abrir} className="inline-flex items-center gap-2 rounded-full bg-ganet-ink px-6 py-3.5 font-semibold text-white transition hover:bg-ganet-night">
               <ClipboardList className="h-4 w-4" /> Ver mi cotización
             </button>
             <button
               onClick={() => abrirWhatsapp(EMPRESA.whatsapp, 'Hola Ganet, quisiera más información.')}
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 font-semibold text-ganet-ink transition hover:bg-slate-100"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 font-semibold text-ganet-ink shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50"
             >
               <MessageCircle className="h-4 w-4" /> Escríbenos
             </button>

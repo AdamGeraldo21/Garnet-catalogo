@@ -355,7 +355,7 @@ function Paginacion({ actual, total, ir }) {
               onClick={() => ir(n)}
               aria-current={n === actual ? 'page' : undefined}
               className={`grid h-11 min-w-11 place-items-center rounded-xl px-2 text-sm font-semibold transition ${
-                n === actual ? 'bg-gradient-to-br from-ganet-cyan to-ganet-blue text-ganet-ink shadow-lg shadow-ganet-blue/30' : 'text-slate-600 hover:bg-slate-100'
+                n === actual ? 'bg-gradient-to-br from-ganet-cyan to-ganet-blue text-ganet-ink shadow-lg shadow-ganet-blue/20' : 'text-slate-600 hover:bg-slate-100'
               }`}
             >
               {n}

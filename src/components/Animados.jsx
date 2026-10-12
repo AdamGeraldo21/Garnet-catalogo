@@ -65,7 +65,7 @@ export function PageHeader({ titulo, subtitulo, etiqueta, imagen, children }) {
       {imagen && <img src={imagen} alt="" className="absolute inset-0 -z-20 h-full w-full animate-kenburns object-cover opacity-40" />}
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ganet-ink via-ganet-ink/90 to-ganet-ink/40" />
       <div className="absolute inset-0 -z-10 bg-grid opacity-50" />
-      <div className="absolute -left-20 top-0 -z-10 h-72 w-72 animate-glow rounded-full bg-ganet-blue/30 blur-[100px]" />
+      <div className="absolute -left-20 top-0 -z-10 h-72 w-72 animate-glow rounded-full bg-ganet-blue/15 blur-[100px]" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {etiqueta && (
           <span className="inline-flex items-center gap-2 rounded-full border border-ganet-cyan/30 bg-ganet-cyan/10 px-3 py-1 text-xs font-medium text-ganet-cyan">
