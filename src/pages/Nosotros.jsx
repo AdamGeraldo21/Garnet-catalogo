@@ -4,7 +4,6 @@ import Icono from '../components/Icono'
 import AnatomiaMarca from '../components/AnatomiaMarca'
 import { Contador, PageHeader, Reveal, Titulo } from '../components/Animados'
 import isotipo from '../assets/logo-mark.png'
-import sello from '../assets/sello.png'
 import { CATEGORIAS, EMPRESA, PRODUCTOS, SERVICIOS } from '../data/catalogo'
 import { MISION, POR_QUE, QUIENES_SOMOS, VALORES, VISION } from '../data/nosotros'
 
@@ -118,7 +117,16 @@ export default function Nosotros() {
       <section className="px-4 pb-24 sm:px-6">
         <Reveal className="relative mx-auto grid max-w-5xl items-center gap-10 overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#EAF4FB] via-white to-[#EEF6E8] p-8 text-ganet-ink ring-1 ring-slate-200 sm:p-12 md:grid-cols-[auto_1fr]">
           <div className="absolute inset-0 bg-grid opacity-60" />
-          <img src={sello} alt="Sello Ganet" className="relative mx-auto w-40 animate-[orbit_30s_linear_infinite] opacity-90 sm:w-52" />
+          <div className="relative mx-auto grid h-40 w-40 place-items-center sm:h-48 sm:w-48">
+            <span className="absolute inset-0 animate-orbit rounded-full border border-dashed border-ganet-sky/50" />
+            <span className="absolute inset-3 rounded-full bg-gradient-to-br from-ganet-cyan to-ganet-blue shadow-2xl shadow-ganet-blue/30" />
+            <span className="relative font-display text-5xl font-extrabold tracking-tight text-white sm:text-6xl">
+              {EMPRESA.ceo.split(' ').map((p) => p[0]).join('')}
+            </span>
+            <span className="absolute bottom-3 right-3 grid h-11 w-11 place-items-center rounded-full bg-white shadow-lg ring-4 ring-white">
+              <img src={isotipo} alt="" className="h-6 w-auto" />
+            </span>
+          </div>
           <div className="relative">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ganet-green">Fundador</p>
             <h3 className="mt-2 font-display text-3xl font-bold">{EMPRESA.ceo}</h3>
