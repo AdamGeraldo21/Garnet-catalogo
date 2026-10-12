@@ -1,16 +1,17 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { ArrowDownAZ, ArrowRight, ChevronLeft, ChevronRight, PackageSearch, Palette, Search, SlidersHorizontal, X } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, PackageSearch, Palette, Search, X } from 'lucide-react'
 import ProductoCard from '../components/ProductoCard'
 import Icono from '../components/Icono'
+import Selector from '../components/Selector'
 import { PageHeader } from '../components/Animados'
 import { CATEGORIAS, PRODUCTOS } from '../data/catalogo'
 
 const POR_PAGINA = 8
 const ORDENES = [
-  { id: 'destacados', label: 'Destacados' },
-  { id: 'az', label: 'Nombre A–Z' },
-  { id: 'za', label: 'Nombre Z–A' },
+  { id: 'destacados', label: 'Destacados', icono: 'Sparkles' },
+  { id: 'az', label: 'Nombre A–Z', icono: 'ArrowDownAZ' },
+  { id: 'za', label: 'Nombre Z–A', icono: 'ArrowUpZA' },
 ]
 const PESO_ETIQUETA = { 'Más pedido': 0, Personalizable: 1, Nuevo: 2 }
 
@@ -170,20 +171,14 @@ export default function Catalogo() {
                   <span className="whitespace-nowrap">Personalizables</span>
                 </button>
 
-                <label className="relative">
-                  <ArrowDownAZ className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
-                  <select
-                    value={orden}
-                    onChange={(e) => actualizar({ orden: e.target.value === 'destacados' ? '' : e.target.value })}
-                    className="cursor-pointer appearance-none rounded-2xl border-0 bg-slate-100/80 py-3 pl-10 pr-9 text-sm font-medium text-slate-600 transition hover:bg-slate-200/80 focus:outline-none focus:ring-2 focus:ring-ganet-sky"
-                    aria-label="Ordenar"
-                  >
-                    {ORDENES.map((o) => (
-                      <option key={o.id} value={o.id}>{o.label}</option>
-                    ))}
-                  </select>
-                  <SlidersHorizontal className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" />
-                </label>
+                <Selector
+                  valor={orden}
+                  onChange={(v) => actualizar({ orden: v === 'destacados' ? '' : v })}
+                  grupos={[{ titulo: 'Ordenar por', opciones: ORDENES.map((o) => ({ valor: o.id, label: o.label, icono: o.icono })) }]}
+                  etiqueta="Ordenar"
+                  className="w-48 [&>div]:left-auto"
+                  boton="!rounded-2xl !bg-slate-100/80 !py-2.5 !ring-0 font-medium hover:!bg-slate-200/80"
+                />
               </div>
             </div>
 

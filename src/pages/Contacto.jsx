@@ -1,13 +1,18 @@
 import { useState } from 'react'
 import { Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react'
 import { PageHeader, Reveal } from '../components/Animados'
+import Selector from '../components/Selector'
 import { CATEGORIAS, EMPRESA, SERVICIOS } from '../data/catalogo'
 import { abrirWhatsapp } from '../context/Cotizacion'
 
-const INTERESES = [...CATEGORIAS.map((c) => c.nombre), ...SERVICIOS.map((s) => s.nombre), 'Otro']
+const GRUPOS = [
+  { titulo: 'Productos', opciones: CATEGORIAS.map((c) => ({ valor: c.nombre, label: c.nombre, icono: c.icono })) },
+  { titulo: 'Servicios', opciones: SERVICIOS.map((s) => ({ valor: s.nombre, label: s.nombre, icono: s.icono })) },
+  { titulo: 'Otro', opciones: [{ valor: 'Otro', label: 'Otro tema', icono: 'MessageCircle', detalle: 'Cuéntanos en el mensaje' }] },
+]
 
 export default function Contacto() {
-  const [form, setForm] = useState({ nombre: '', empresa: '', telefono: '', interes: INTERESES[0], mensaje: '' })
+  const [form, setForm] = useState({ nombre: '', empresa: '', telefono: '', interes: GRUPOS[0].opciones[0].valor, mensaje: '' })
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value })
 
   const mensaje = () =>
@@ -53,7 +58,7 @@ export default function Contacto() {
       />
 
       <section className="relative z-10 mx-auto -mt-10 grid max-w-7xl gap-8 px-4 pb-16 sm:px-6 lg:grid-cols-[1.3fr_1fr]">
-        <Reveal>
+        <Reveal className="relative z-20">
           <form onSubmit={enviarWhatsapp} className="relative rounded-[2rem] bg-white p-6 shadow-2xl shadow-slate-900/10 ring-1 ring-slate-200 sm:p-10">
             <h2 className="font-display text-2xl font-bold text-ganet-ink">Escríbenos</h2>
             <p className="mt-1 text-sm text-slate-500">Al enviar se abre WhatsApp (o tu correo) con el mensaje listo.</p>
@@ -61,11 +66,7 @@ export default function Contacto() {
               <input required value={form.nombre} onChange={set('nombre')} placeholder="Nombre *" className={campo} />
               <input value={form.empresa} onChange={set('empresa')} placeholder="Empresa" className={campo} />
               <input value={form.telefono} onChange={set('telefono')} placeholder="Teléfono" type="tel" className={campo} />
-              <select value={form.interes} onChange={set('interes')} className={campo}>
-                {INTERESES.map((i) => (
-                  <option key={i}>{i}</option>
-                ))}
-              </select>
+              <Selector valor={form.interes} onChange={(v) => setForm({ ...form, interes: v })} grupos={GRUPOS} etiqueta="¿Qué te interesa?" />
               <textarea required value={form.mensaje} onChange={set('mensaje')} rows={5} placeholder="¿En qué te podemos ayudar? *" className={`${campo} resize-none sm:col-span-2`} />
             </div>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
