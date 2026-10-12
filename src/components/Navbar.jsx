@@ -24,7 +24,7 @@ export function Marca({ className = '' }) {
       <img src={isotipo} alt="" className="h-10 w-auto transition duration-500 group-hover:rotate-[-8deg] group-hover:scale-110" />
       <span className="flex flex-col gap-1 border-l border-white/15 pl-3">
         <img src={wordmark} alt="GANET" className="h-[1.15rem] w-auto" />
-        <span className="text-[10px] font-medium tracking-[0.12em] text-ganet-sky/90">Soluciones Empresariales</span>
+        <span className="hidden text-[10px] font-medium tracking-[0.12em] text-ganet-sky/90 sm:block">Soluciones Empresariales</span>
       </span>
     </Link>
   )

@@ -26,16 +26,22 @@ const TITULOS = {
 export default function App() {
   const { pathname } = useLocation()
 
+  // Dentro del catálogo (cambiar de línea) no se reinicia la página ni se vuelve arriba.
+  const base = '/' + (pathname.split('/')[1] || '')
+  const clave = base === '/catalogo' ? base : pathname
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
-    const base = '/' + (pathname.split('/')[1] || '')
+  }, [clave])
+
+  useEffect(() => {
     document.title = `${TITULOS[base] || 'Ganet'} — Ganet Soluciones Empresariales`
   }, [pathname])
 
   return (
     <>
       <Navbar />
-      <main key={pathname} className="animate-pagina">
+      <main key={clave} className="animate-pagina">
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/catalogo" element={<Catalogo />} />
