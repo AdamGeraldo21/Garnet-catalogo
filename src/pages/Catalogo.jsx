@@ -1,11 +1,12 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { ArrowRight, ChevronLeft, ChevronRight, PackageSearch, Palette, Search, X } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, MessageCircle, PackageSearch, Palette, Search, X } from 'lucide-react'
 import ProductoCard from '../components/ProductoCard'
 import Icono from '../components/Icono'
 import Selector from '../components/Selector'
 import { PageHeader } from '../components/Animados'
-import { CATEGORIAS, PRODUCTOS } from '../data/catalogo'
+import { CATEGORIAS, EMPRESA, PRODUCTOS } from '../data/catalogo'
+import { abrirWhatsapp } from '../context/Cotizacion'
 
 const POR_PAGINA = 8
 const ORDENES = [
@@ -109,35 +110,13 @@ export default function Catalogo() {
         </nav>
       </PageHeader>
 
-      {/* Líneas como tarjetas con foto */}
-      <section className="relative z-10 mx-auto -mt-14 max-w-7xl px-4 sm:px-6">
-        <div className="no-scrollbar -mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 lg:grid-cols-6">
-          {CATEGORIAS.map((c) => {
-            const activa = c.id === categoria
-            return (
-              <button
-                key={c.id}
-                onClick={() => elegir(activa ? 'todos' : c.id)}
-                className={`group relative h-36 w-40 shrink-0 snap-start overflow-hidden rounded-2xl text-left shadow-lg transition hover:-translate-y-1 sm:w-auto ${
-                  activa ? 'ring-4 ring-ganet-cyan' : 'ring-1 ring-black/5'
-                }`}
-              >
-                <img src={c.imagen} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
-                <div className={`absolute inset-0 bg-gradient-to-t ${activa ? 'from-ganet-blue/95 via-ganet-blue/60' : 'from-ganet-ink/95 via-ganet-ink/50'} to-transparent`} />
-                <span className={`absolute left-3 top-3 grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br ${c.color} text-white shadow`}>
-                  <Icono nombre={c.icono} className="h-4 w-4" />
-                </span>
-                <span className="absolute inset-x-3 bottom-3 text-white">
-                  <span className="block text-sm font-semibold leading-tight">{c.corto}</span>
-                  <span className="text-xs text-white/70">{PRODUCTOS.filter((p) => p.categoria === c.id).length} artículos</span>
-                </span>
-              </button>
-            )
-          })}
-        </div>
-      </section>
+      <section className="mx-auto grid max-w-7xl gap-8 px-4 pb-24 pt-10 sm:px-6 lg:grid-cols-[16.5rem_minmax(0,1fr)]">
+        {/* Barra lateral de líneas (escritorio) */}
+        <aside className="hidden lg:block">
+          <Lateral categoria={categoria} conteo={conteo} total={base.length} elegir={elegir} />
+        </aside>
 
-      <section className="mx-auto max-w-7xl px-4 pb-24 pt-10 sm:px-6">
+        <div className="min-w-0">
         {/* Barra de herramientas */}
         <div className="relative z-30 -mx-2 px-2 py-2 sm:-mx-3 sm:px-3 md:sticky md:top-[5rem]">
           <div className="rounded-3xl bg-white/95 p-3 shadow-xl shadow-slate-900/[0.06] ring-1 ring-slate-200/80 backdrop-blur-xl sm:p-4">
@@ -182,7 +161,9 @@ export default function Catalogo() {
               </div>
             </div>
 
-            <Pestanas categoria={categoria} conteo={conteo} total={base.length} elegir={elegir} />
+            <div className="lg:hidden">
+              <Pestanas categoria={categoria} conteo={conteo} total={base.length} elegir={elegir} />
+            </div>
           </div>
         </div>
 
@@ -213,7 +194,7 @@ export default function Catalogo() {
 
         {visibles.length > 0 ? (
           <>
-            <div key={`${categoria}-${q}-${orden}-${soloPersonalizables}-${paginaReal}`} className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div key={`${categoria}-${q}-${orden}-${soloPersonalizables}-${paginaReal}`} className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {visibles.map((p, i) => (
                 <div key={p.id} className="animate-fade-up" style={{ animationDelay: `${i * 50}ms` }}>
                   <ProductoCard producto={p} className="h-full" />
@@ -236,8 +217,78 @@ export default function Catalogo() {
             </button>
           </div>
         )}
+        </div>
       </section>
     </>
+  )
+}
+
+// Lista lateral de líneas con ícono y contador.
+function Lateral({ categoria, conteo, total, elegir }) {
+  const fila = (activo, deshabilitado) =>
+    `group flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left text-sm transition disabled:pointer-events-none disabled:opacity-40 ${
+      activo ? 'bg-ganet-sky/10 font-semibold text-ganet-ink ring-1 ring-ganet-sky/30' : 'text-slate-600 hover:bg-white hover:text-ganet-ink hover:shadow-sm'
+    }`
+  const icono = (activo, color) =>
+    `grid h-9 w-9 shrink-0 place-items-center rounded-xl transition ${
+      activo ? `bg-gradient-to-br ${color} text-white shadow-md` : 'bg-slate-100 text-slate-500 group-hover:bg-sky-50 group-hover:text-ganet-blue'
+    }`
+  const numero = (activo) => `ml-auto text-xs font-semibold tabular-nums ${activo ? 'text-ganet-blue' : 'text-slate-400'}`
+
+  return (
+    <div className="sticky top-28 space-y-6">
+      <nav>
+        <p className="px-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Líneas</p>
+        <ul className="mt-3 space-y-1">
+          <li>
+            <button onClick={() => elegir('todos')} className={fila(categoria === 'todos')}>
+              <span className={icono(categoria === 'todos', 'from-ganet-cyan to-ganet-blue')}>
+                <Icono nombre="LayoutGrid" className="h-4 w-4" />
+              </span>
+              Todas
+              <span className={numero(categoria === 'todos')}>{total}</span>
+            </button>
+          </li>
+          {CATEGORIAS.map((c) => {
+            const activo = c.id === categoria
+            const n = conteo[c.id]
+            return (
+              <li key={c.id}>
+                <button onClick={() => elegir(c.id)} disabled={!activo && n === 0} className={fila(activo)}>
+                  <span className={icono(activo, c.color)}>
+                    <Icono nombre={c.icono} className="h-4 w-4" />
+                  </span>
+                  <span className="leading-tight">{c.nombre}</span>
+                  <span className={numero(activo)}>{n}</span>
+                </button>
+              </li>
+            )
+          })}
+        </ul>
+
+        <div className="mx-3 my-4 border-t border-dashed border-slate-200" />
+
+        <Link to="/servicios" className={fila(false)}>
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ganet-lime/15 text-ganet-green">
+            <Icono nombre="Calculator" className="h-4 w-4" />
+          </span>
+          <span className="leading-tight">Servicios contables</span>
+          <ArrowRight className="ml-auto h-4 w-4 text-slate-300 transition group-hover:translate-x-0.5 group-hover:text-ganet-blue" />
+        </Link>
+      </nav>
+
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#EAF4FB] to-[#EEF6E8] p-5 ring-1 ring-slate-200">
+        <span className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-ganet-sky/15 blur-xl" />
+        <h3 className="relative font-display text-base font-bold text-ganet-ink">¿No encuentras lo que buscas?</h3>
+        <p className="relative mt-1.5 text-sm leading-relaxed text-slate-600">Conseguimos productos que no están en el catálogo. Escríbenos y te cotizamos.</p>
+        <button
+          onClick={() => abrirWhatsapp(EMPRESA.whatsapp, 'Hola Ganet, busco un producto que no encontré en el catálogo:')}
+          className="relative mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#25D366]/25 transition hover:brightness-105"
+        >
+          <MessageCircle className="h-4 w-4" /> Pedir por WhatsApp
+        </button>
+      </div>
+    </div>
   )
 }
 
