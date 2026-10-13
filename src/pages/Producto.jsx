@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Link, useParams } from 'react-router-dom'
-import { Camera, Check, ChevronDown, ChevronRight, Image as ImageIcon, MessageCircle, Minus, Palette, Plus, ShieldCheck, Sparkles, Truck, ZoomIn } from 'lucide-react'
+import { Camera, Check, ChevronDown, ChevronRight, MessageCircle, Minus, Palette, Plus, ShieldCheck, Sparkles, Truck, ZoomIn } from 'lucide-react'
 import ProductoCard from '../components/ProductoCard'
 import VistaProducto from '../components/VistaProducto'
 import Icono from '../components/Icono'
@@ -57,7 +57,6 @@ function Detalle({ producto }) {
   const vistas = [
     producto.mockup && { id: 'mockup', label: 'Personalizado', icono: Palette },
     producto.imagen && { id: 'foto', label: 'Foto', icono: Camera },
-    categoria.imagen && categoria.imagen !== producto.imagen && { id: 'ambiente', label: 'Línea', icono: ImageIcon },
   ].filter(Boolean)
 
   useEffect(() => {
@@ -111,7 +110,6 @@ function Detalle({ producto }) {
                   >
                     {v.id === 'mockup' && <VistaProducto producto={producto} categoria={categoria} color={estado.color.hex} modo="mockup" />}
                     {v.id === 'foto' && <img src={producto.imagen} alt="" className="h-full w-full object-cover" />}
-                    {v.id === 'ambiente' && <img src={categoria.imagen} alt="" className="h-full w-full object-cover" />}
                     <span className="absolute inset-x-1 bottom-1 flex items-center justify-center gap-1 rounded-lg bg-white/90 py-0.5 text-[10px] font-semibold text-ganet-ink backdrop-blur">
                       <v.icono className="h-3 w-3" /> {v.label}
                     </span>
@@ -339,7 +337,7 @@ function Paso({ n, titulo, extra, children }) {
 // Imagen principal con lupa al pasar el ratón (solo fotos).
 function Visor({ producto, categoria, vista, estado }) {
   const [zoom, setZoom] = useState(null)
-  const src = vista === 'foto' ? producto.imagen : vista === 'ambiente' ? categoria.imagen : null
+  const src = vista === 'foto' ? producto.imagen : null
 
   return (
     <div className="group relative aspect-square overflow-hidden rounded-[2.25rem] bg-white shadow-2xl shadow-slate-900/10 ring-1 ring-slate-200">
@@ -369,7 +367,7 @@ function Visor({ producto, categoria, vista, estado }) {
         <span className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-ganet-ink shadow-sm backdrop-blur">
           {src ? (
             <>
-              <ZoomIn className="h-3.5 w-3.5 text-ganet-blue" /> {vista === 'ambiente' ? 'Línea ' + categoria.corto : <><span className="hidden sm:inline">Pasa el ratón para ampliar</span><span className="sm:hidden">Foto del producto</span></>}
+              <ZoomIn className="h-3.5 w-3.5 text-ganet-blue" /> {<><span className="hidden sm:inline">Pasa el ratón para ampliar</span><span className="sm:hidden">Foto del producto</span></>}
             </>
           ) : (
             <>
