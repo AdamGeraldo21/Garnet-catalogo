@@ -35,10 +35,6 @@ export default function Contacto() {
     abrirWhatsapp(EMPRESA.whatsapp, mensaje())
   }
 
-  const enviarCorreo = () => {
-    window.location.href = `mailto:${EMPRESA.email}?subject=${encodeURIComponent(`Contacto web — ${form.interes}`)}&body=${encodeURIComponent(mensaje())}`
-  }
-
   const datos = [
     { icono: Phone, label: 'Teléfonos', valor: EMPRESA.telefonos.join('  ·  '), href: `tel:+${EMPRESA.whatsapp}` },
     { icono: MessageCircle, label: 'WhatsApp', valor: EMPRESA.telefonos[0], href: `https://wa.me/${EMPRESA.whatsapp}` },
@@ -61,7 +57,7 @@ export default function Contacto() {
         <Reveal className="relative z-20">
           <form onSubmit={enviarWhatsapp} className="relative rounded-[2rem] bg-white p-6 shadow-2xl shadow-slate-900/10 ring-1 ring-slate-200 sm:p-10">
             <h2 className="font-display text-2xl font-bold text-ganet-ink">Escríbenos</h2>
-            <p className="mt-1 text-sm text-slate-500">Al enviar se abre WhatsApp (o tu correo) con el mensaje listo.</p>
+            <p className="mt-1 text-sm text-slate-500">Al enviar se abre WhatsApp con tu mensaje listo.</p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               <input required value={form.nombre} onChange={set('nombre')} placeholder="Nombre *" className={campo} />
               <input value={form.empresa} onChange={set('empresa')} placeholder="Empresa" className={campo} />
@@ -72,13 +68,6 @@ export default function Contacto() {
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <button type="submit" className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 font-semibold text-white shadow-lg shadow-[#25D366]/25 transition hover:brightness-105">
                 <Send className="h-4 w-4" /> Enviar por WhatsApp
-              </button>
-              <button
-                type="button"
-                onClick={(e) => e.currentTarget.form.reportValidity() && enviarCorreo()}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 px-6 py-3.5 font-semibold text-ganet-ink transition hover:border-ganet-blue hover:text-ganet-blue"
-              >
-                <Mail className="h-4 w-4" /> Por correo
               </button>
             </div>
           </form>
