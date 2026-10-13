@@ -5,6 +5,7 @@ import HeroSlider from '../components/HeroSlider'
 import ProductoCard from '../components/ProductoCard'
 import Mockup from '../components/Mockup'
 import Icono from '../components/Icono'
+import isotipo from '../assets/logo-mark.png'
 import { Contador, Reveal, Titulo } from '../components/Animados'
 import { CATEGORIAS, COLORES, EMPRESA, PRODUCTOS, SERVICIOS, productoPorId } from '../data/catalogo'
 import { abrirWhatsapp, useCotizacion } from '../context/Cotizacion'
@@ -25,60 +26,51 @@ export default function Inicio() {
   )
 }
 
-// Dos franjas cruzadas que se desplazan en sentidos opuestos.
-const VALORES_CINTA = [
-  { icono: 'Truck', label: 'Entrega a tu empresa' },
-  { icono: 'Palette', label: 'Personalizado con tu marca' },
-  { icono: 'MessageCircle', label: 'Cotiza por WhatsApp' },
-  { icono: 'BadgeCheck', label: 'Calidad garantizada' },
+// Cinta tipográfica: nombres de las líneas en grande, alternando relleno y contorno.
+const VENTAJAS = [
+  { icono: 'Boxes', titulo: 'Un solo proveedor', texto: 'Oficina, limpieza, marca y contabilidad' },
+  { icono: 'Palette', titulo: 'Con tu marca', texto: 'Bordado, serigrafía, sublimación y grabado' },
+  { icono: 'Truck', titulo: 'Entrega a tu empresa', texto: 'Coordinamos el envío por ti' },
+  { icono: 'MessageCircle', titulo: 'Cotiza por WhatsApp', texto: 'Respuesta rápida y sin vueltas' },
 ]
 
 function Cinta() {
-  const lineas = CATEGORIAS.map((c) => ({ ...c, to: `/catalogo/${c.id}` }))
-  const extras = [...SERVICIOS.map((s) => ({ id: s.id, nombre: s.nombre, icono: s.icono, to: '/servicios' })), ...VALORES_CINTA.map((v) => ({ id: v.label, nombre: v.label, icono: v.icono }))]
+  const lineas = [...CATEGORIAS, ...CATEGORIAS, ...CATEGORIAS]
 
   return (
-    <section className="relative isolate overflow-hidden bg-slate-50 pb-6 pt-10" aria-label="Lo que ofrecemos">
-      {/* Franja oscura: líneas de productos */}
-      <div className="relative overflow-hidden bg-ganet-ink py-3.5">
-        <span className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-ganet-ink to-transparent" />
-        <span className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-ganet-ink to-transparent" />
-        <div className="flex w-max animate-marquee gap-4 hover:[animation-play-state:paused]">
-          {[...lineas, ...lineas, ...lineas].map((c, i) => (
-            <Link
-              key={i}
-              to={c.to}
-              className="group flex shrink-0 items-center gap-3 rounded-full border border-white/10 bg-white/5 py-1.5 pl-1.5 pr-5 transition hover:border-ganet-cyan/50 hover:bg-white/10"
-            >
-              <span className={`grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br ${c.color} text-white shadow-md transition group-hover:scale-110`}>
-                <Icono nombre={c.icono} className="h-4 w-4" />
+    <section className="relative overflow-hidden bg-slate-50 pb-16 pt-12" aria-label="Lo que ofrecemos">
+      <div className="mask-fade-x">
+        <div className="flex w-max animate-marquee items-center [animation-duration:60s] hover:[animation-play-state:paused]">
+          {lineas.map((c, i) => (
+            <Link key={i} to={`/catalogo/${c.id}`} className="group flex shrink-0 items-center">
+              <span
+                className={`whitespace-nowrap px-8 font-display text-4xl font-extrabold uppercase tracking-tight transition-colors duration-300 sm:text-6xl ${
+                  i % 2 === 0
+                    ? 'text-ganet-ink group-hover:text-ganet-blue'
+                    : 'bg-gradient-to-r from-ganet-sky via-ganet-blue to-ganet-lime bg-clip-text text-transparent opacity-90 group-hover:opacity-100'
+                }`}
+              >
+                {c.corto}
               </span>
-              <span className="whitespace-nowrap font-display text-sm font-semibold uppercase tracking-[0.12em] text-white">{c.nombre}</span>
+              <img src={isotipo} alt="" className="h-7 w-auto shrink-0 opacity-80 transition duration-500 group-hover:rotate-[20deg] group-hover:opacity-100 sm:h-9" />
             </Link>
           ))}
         </div>
       </div>
 
-      {/* Franja clara: servicios y ventajas, en sentido contrario */}
-      <div className="mask-fade-x relative border-b border-slate-200 bg-white py-3">
-        <div className="flex w-max animate-marquee gap-4 [animation-direction:reverse] [animation-duration:46s] hover:[animation-play-state:paused]">
-          {[...extras, ...extras, ...extras].map((e, i) => {
-            const contenido = (
-              <>
-                <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-ganet-lime/20 to-ganet-sky/20 text-ganet-blue">
-                  <Icono nombre={e.icono} className="h-4 w-4" />
-                </span>
-                <span className="whitespace-nowrap text-sm font-semibold text-ganet-ink">{e.nombre}</span>
-                <span className="ml-2 h-1.5 w-1.5 rounded-full bg-ganet-lime" />
-              </>
-            )
-            const clase = 'flex shrink-0 items-center gap-2.5 rounded-full px-3 py-1.5'
-            return e.to ? (
-              <Link key={i} to={e.to} className={`${clase} transition hover:bg-slate-50`}>{contenido}</Link>
-            ) : (
-              <span key={i} className={clase}>{contenido}</span>
-            )
-          })}
+      <div className="mx-auto mt-12 max-w-6xl px-4 sm:px-6">
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-3xl bg-slate-200/70 sm:grid-cols-2 ring-1 ring-slate-200/70 lg:grid-cols-4">
+          {VENTAJAS.map((v, i) => (
+            <Reveal key={v.titulo} retraso={i * 80} className="group flex items-start gap-4 bg-white p-5 transition hover:bg-sky-50/50 sm:p-6">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-ganet-cyan/15 to-ganet-lime/15 text-ganet-blue transition group-hover:from-ganet-cyan group-hover:to-ganet-blue group-hover:text-white">
+                <Icono nombre={v.icono} className="h-5 w-5" />
+              </span>
+              <span className="min-w-0">
+                <span className="block font-display text-sm font-bold text-ganet-ink sm:text-base">{v.titulo}</span>
+                <span className="mt-0.5 block text-xs leading-relaxed text-slate-500 sm:text-sm">{v.texto}</span>
+              </span>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
