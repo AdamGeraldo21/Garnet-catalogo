@@ -27,7 +27,7 @@ export default {
         },
         marquee: {
           from: { transform: 'translateX(0)' },
-          to: { transform: 'translateX(-50%)' },
+          to: { transform: 'translateX(-33.333%)' },
         },
         orbit: {
           from: { transform: 'rotate(0deg)' },

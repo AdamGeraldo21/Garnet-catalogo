@@ -25,19 +25,61 @@ export default function Inicio() {
   )
 }
 
+// Dos franjas cruzadas que se desplazan en sentidos opuestos.
+const VALORES_CINTA = [
+  { icono: 'Truck', label: 'Entrega a tu empresa' },
+  { icono: 'Palette', label: 'Personalizado con tu marca' },
+  { icono: 'MessageCircle', label: 'Cotiza por WhatsApp' },
+  { icono: 'BadgeCheck', label: 'Calidad garantizada' },
+]
+
 function Cinta() {
-  const textos = [...CATEGORIAS.map((c) => c.nombre), ...SERVICIOS.map((s) => s.nombre)]
+  const lineas = CATEGORIAS.map((c) => ({ ...c, to: `/catalogo/${c.id}` }))
+  const extras = [...SERVICIOS.map((s) => ({ id: s.id, nombre: s.nombre, icono: s.icono, to: '/servicios' })), ...VALORES_CINTA.map((v) => ({ id: v.label, nombre: v.label, icono: v.icono }))]
+
   return (
-    <div className="mask-fade-x overflow-hidden bg-slate-50 py-6">
-      <div className="flex w-max animate-marquee gap-10 whitespace-nowrap">
-        {[...textos, ...textos].map((t, i) => (
-          <span key={i} className="flex items-center gap-10 font-display text-lg font-bold uppercase tracking-[0.15em] text-slate-300">
-            {t}
-            <span className="h-2.5 w-2.5 rotate-45 bg-gradient-to-br from-ganet-cyan to-ganet-lime" />
-          </span>
-        ))}
+    <section className="relative isolate overflow-hidden bg-slate-50 py-14 sm:py-16" aria-label="Lo que ofrecemos">
+      {/* Franja oscura: líneas de productos */}
+      <div className="relative z-10 -mx-8 -rotate-2 bg-ganet-ink py-4 shadow-xl shadow-ganet-ink/20">
+        <div className="flex w-max animate-marquee gap-4 hover:[animation-play-state:paused]">
+          {[...lineas, ...lineas, ...lineas].map((c, i) => (
+            <Link
+              key={i}
+              to={c.to}
+              className="group flex shrink-0 items-center gap-3 rounded-full border border-white/10 bg-white/5 py-1.5 pl-1.5 pr-5 transition hover:border-ganet-cyan/50 hover:bg-white/10"
+            >
+              <span className={`grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br ${c.color} text-white shadow-md transition group-hover:scale-110`}>
+                <Icono nombre={c.icono} className="h-4 w-4" />
+              </span>
+              <span className="whitespace-nowrap font-display text-sm font-semibold uppercase tracking-[0.12em] text-white">{c.nombre}</span>
+            </Link>
+          ))}
+        </div>
       </div>
-    </div>
+
+      {/* Franja clara: servicios y ventajas, en sentido contrario */}
+      <div className="relative -mx-8 mt-6 rotate-2 border-y border-slate-200 bg-white py-4 shadow-lg shadow-slate-900/5">
+        <div className="flex w-max animate-marquee gap-4 [animation-direction:reverse] [animation-duration:46s] hover:[animation-play-state:paused]">
+          {[...extras, ...extras, ...extras].map((e, i) => {
+            const contenido = (
+              <>
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-ganet-lime/20 to-ganet-sky/20 text-ganet-blue">
+                  <Icono nombre={e.icono} className="h-4 w-4" />
+                </span>
+                <span className="whitespace-nowrap text-sm font-semibold text-ganet-ink">{e.nombre}</span>
+                <span className="ml-2 h-1.5 w-1.5 rounded-full bg-ganet-lime" />
+              </>
+            )
+            const clase = 'flex shrink-0 items-center gap-2.5 rounded-full px-3 py-1.5'
+            return e.to ? (
+              <Link key={i} to={e.to} className={`${clase} transition hover:bg-slate-50`}>{contenido}</Link>
+            ) : (
+              <span key={i} className={clase}>{contenido}</span>
+            )
+          })}
+        </div>
+      </div>
+    </section>
   )
 }
 
