@@ -38,9 +38,11 @@ function Cinta() {
   const extras = [...SERVICIOS.map((s) => ({ id: s.id, nombre: s.nombre, icono: s.icono, to: '/servicios' })), ...VALORES_CINTA.map((v) => ({ id: v.label, nombre: v.label, icono: v.icono }))]
 
   return (
-    <section className="relative isolate overflow-hidden bg-slate-50 py-14 sm:py-16" aria-label="Lo que ofrecemos">
+    <section className="relative isolate overflow-hidden bg-slate-50 pb-6 pt-10" aria-label="Lo que ofrecemos">
       {/* Franja oscura: líneas de productos */}
-      <div className="relative z-10 -mx-8 -rotate-2 bg-ganet-ink py-4 shadow-xl shadow-ganet-ink/20">
+      <div className="relative overflow-hidden bg-ganet-ink py-3.5">
+        <span className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-ganet-ink to-transparent" />
+        <span className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-ganet-ink to-transparent" />
         <div className="flex w-max animate-marquee gap-4 hover:[animation-play-state:paused]">
           {[...lineas, ...lineas, ...lineas].map((c, i) => (
             <Link
@@ -58,7 +60,7 @@ function Cinta() {
       </div>
 
       {/* Franja clara: servicios y ventajas, en sentido contrario */}
-      <div className="relative -mx-8 mt-6 rotate-2 border-y border-slate-200 bg-white py-4 shadow-lg shadow-slate-900/5">
+      <div className="mask-fade-x relative border-b border-slate-200 bg-white py-3">
         <div className="flex w-max animate-marquee gap-4 [animation-direction:reverse] [animation-duration:46s] hover:[animation-play-state:paused]">
           {[...extras, ...extras, ...extras].map((e, i) => {
             const contenido = (
