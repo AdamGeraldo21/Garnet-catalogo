@@ -49,3 +49,10 @@ body {
     transition: none !important;
   }
 }
+
+/* En la ficha de producto (móvil) el botón de WhatsApp sube por encima de la barra fija */
+@media (max-width: 1023px) {
+  body[data-barra-producto] .boton-whatsapp {
+    bottom: 5.5rem;
+  }
+}
