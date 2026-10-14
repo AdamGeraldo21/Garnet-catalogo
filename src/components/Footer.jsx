@@ -51,7 +51,7 @@ export default function Footer() {
 
       <div className="relative border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs sm:flex-row sm:px-6">
-          <p>© {new Date().getFullYear()} {EMPRESA.nombre} · RNC {EMPRESA.rnc}</p>
+          <p>© {new Date().getFullYear()} {EMPRESA.nombre}</p>
           <p className="text-slate-500">Hecho en Santo Domingo, República Dominicana</p>
         </div>
       </div>
