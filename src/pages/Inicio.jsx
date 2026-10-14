@@ -38,13 +38,13 @@ function Cinta() {
   const lineas = [...CATEGORIAS, ...CATEGORIAS, ...CATEGORIAS]
 
   return (
-    <section className="relative overflow-hidden bg-slate-50 pb-16 pt-12" aria-label="Lo que ofrecemos">
+    <section className="relative overflow-hidden bg-slate-50 pb-16 pt-10" aria-label="Lo que ofrecemos">
       <div className="mask-fade-x">
         <div className="flex w-max animate-marquee items-center [animation-duration:60s] hover:[animation-play-state:paused]">
           {lineas.map((c, i) => (
             <Link key={i} to={`/catalogo/${c.id}`} className="group flex shrink-0 items-center">
               <span
-                className={`whitespace-nowrap px-8 font-display text-4xl font-extrabold uppercase tracking-tight transition-colors duration-300 sm:text-6xl ${
+                className={`whitespace-nowrap px-6 font-display text-2xl font-extrabold uppercase tracking-tight transition-colors duration-300 sm:text-3xl ${
                   i % 2 === 0
                     ? 'text-ganet-ink group-hover:text-ganet-blue'
                     : 'bg-gradient-to-r from-ganet-sky via-ganet-blue to-ganet-lime bg-clip-text text-transparent opacity-90 group-hover:opacity-100'
@@ -52,13 +52,13 @@ function Cinta() {
               >
                 {c.corto}
               </span>
-              <img src={isotipo} alt="" className="h-7 w-auto shrink-0 opacity-80 transition duration-500 group-hover:rotate-[20deg] group-hover:opacity-100 sm:h-9" />
+              <img src={isotipo} alt="" className="h-5 w-auto shrink-0 opacity-80 transition duration-500 group-hover:rotate-[20deg] group-hover:opacity-100 sm:h-6" />
             </Link>
           ))}
         </div>
       </div>
 
-      <div className="mx-auto mt-12 max-w-6xl px-4 sm:px-6">
+      <div className="mx-auto mt-10 max-w-6xl px-4 sm:px-6">
         <div className="grid grid-cols-1 gap-px overflow-hidden rounded-3xl bg-slate-200/70 sm:grid-cols-2 ring-1 ring-slate-200/70 lg:grid-cols-4">
           {VENTAJAS.map((v, i) => (
             <Reveal key={v.titulo} retraso={i * 80} className="group flex items-start gap-4 bg-white p-5 transition hover:bg-sky-50/50 sm:p-6">
