@@ -22,7 +22,7 @@ export const POR_QUE = [
   { icono: 'Boxes', titulo: 'Todo en un solo lugar', texto: 'Oficina, limpieza, personalización y contabilidad con un único proveedor.' },
   { icono: 'Palette', titulo: 'Tu marca, a tu manera', texto: 'Personalizamos uniformes y artículos con bordado, serigrafía, sublimación o grabado.' },
   { icono: 'Truck', titulo: 'Entrega a tu empresa', texto: 'Coordinamos la entrega para que no tengas que salir de la oficina.' },
-  { icono: 'MessageCircle', titulo: 'Respuesta rápida', texto: 'Cotiza por WhatsApp y recibe tu propuesta sin vueltas.' },
+  { icono: 'MessageCircle', titulo: 'Respuesta rápida', texto: 'Cotiza por WhatsApp y recibe tu propuesta con precios y tiempos de entrega.' },
 ]
 
 // Del manual de marca: anatomía del isotipo

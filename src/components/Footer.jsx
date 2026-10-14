@@ -7,15 +7,13 @@ import { LINKS } from './Navbar'
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-ganet-ink text-slate-400">
-      <div className="absolute inset-0 bg-grid opacity-40" />
-      <div className="absolute -top-32 left-1/4 h-64 w-96 rounded-full bg-ganet-blue/20 blur-[100px]" />
-      <div className="h-1 bg-gradient-to-r from-ganet-cyan via-ganet-blue to-ganet-lime" />
+      <div className="h-px bg-white/10" />
 
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
         <div>
           <img src={logo} alt="Ganet Soluciones Empresariales S.R.L." className="h-20 w-auto" />
           <p className="mt-5 max-w-xs text-sm leading-relaxed">
-            Tu aliado integral: suministros, personalización y servicios contables para que tu empresa funcione sin pausas.
+            Suministros de oficina, artículos con tu marca, limpieza y servicios contables para empresas en Santo Domingo.
           </p>
         </div>
 

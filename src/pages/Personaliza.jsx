@@ -65,9 +65,7 @@ export default function Personaliza() {
           </div>
 
           {/* Escenario */}
-          <div className="relative grid min-h-[22rem] place-items-center overflow-hidden bg-gradient-to-br from-white via-slate-50 to-sky-100 p-6 sm:min-h-[32rem]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(34,189,250,.25),transparent_60%)]" />
-            <div className="absolute left-1/2 top-1/2 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl transition-colors duration-700" style={{ background: `${estado.color.hex}40` }} />
+          <div className="relative grid min-h-[22rem] place-items-center overflow-hidden bg-[radial-gradient(ellipse_at_50%_28%,#ffffff_0%,#f1f3f6_55%,#e4e8ee_100%)] p-6 sm:min-h-[32rem]">
             <Mockup key={producto.id} tipo={producto.mockup} color={estado.color.hex} {...propsMockup(estado)} className="relative w-full max-w-md animate-fade-up drop-shadow-xl" />
             <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium text-ganet-ink shadow-sm ring-1 ring-slate-200 backdrop-blur">
               <Sparkles className="h-3.5 w-3.5 text-ganet-blue" /> {producto.nombre} · {estado.color.nombre}
@@ -86,7 +84,7 @@ export default function Personaliza() {
             <ControlesPersonalizacion producto={producto} estado={estado} set={set} />
             <button
               onClick={() => agregar(producto, 1, detallesCotizacion(estado, producto.opciones?.[0] || ''))}
-              className="mt-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-ganet-cyan to-ganet-blue px-6 py-3.5 font-semibold text-ganet-ink shadow-lg shadow-ganet-blue/25 transition hover:brightness-110"
+              className="mt-auto inline-flex items-center justify-center gap-2 rounded-full bg-ganet-blue px-6 py-3.5 font-semibold text-white shadow-sm transition hover:bg-ganet-ink"
             >
               <Plus className="h-4 w-4" /> Agregar a mi cotización
             </button>
@@ -113,7 +111,7 @@ export default function Personaliza() {
                   }}
                   className={`group w-full overflow-hidden rounded-3xl bg-white text-left ring-1 transition hover:-translate-y-1 hover:shadow-xl ${p.id === producto.id ? 'ring-2 ring-ganet-blue' : 'ring-slate-200'}`}
                 >
-                  <div className="aspect-square bg-gradient-to-br from-slate-50 to-sky-50 p-3">
+                  <div className="aspect-square bg-[radial-gradient(ellipse_at_50%_28%,#ffffff_0%,#f1f3f6_55%,#e4e8ee_100%)] p-3">
                     <Mockup tipo={p.mockup} color={color.hex} {...propsMockup({ ...estado, tecnica: p.tecnicas?.includes(estado.tecnica) ? estado.tecnica : p.tecnicas?.[0] })} className="h-full w-full transition duration-500 group-hover:scale-105" />
                   </div>
                   <p className="px-4 py-3 text-sm font-semibold text-ganet-ink">{p.nombre}</p>

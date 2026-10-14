@@ -19,7 +19,7 @@ export default function ProductoCard({ producto, className = '' }) {
   const enLista = cantidadDe(producto.id)
 
   return (
-    <article className={`group flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200 transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-ganet-blue/15 ${className}`}>
+    <article className={`group flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200 transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-slate-900/10 ${className}`}>
       <Link to={`/producto/${producto.id}`} className="relative block aspect-[4/3.3]">
         <VistaProducto producto={producto} categoria={categoria} color={color?.hex} />
         <span className="absolute left-3 top-3 rounded-full bg-ganet-ink/75 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur">

@@ -33,7 +33,7 @@ export default function Servicios() {
               <div className="overflow-hidden rounded-[2.5rem] shadow-2xl">
                 <img src={IMAGENES[i]} alt="" className="aspect-[4/3] w-full object-cover transition duration-700 hover:scale-105" />
               </div>
-              <span className="absolute -bottom-6 left-8 grid h-20 w-20 place-items-center rounded-3xl bg-gradient-to-br from-ganet-cyan to-ganet-blue text-ganet-ink shadow-2xl shadow-ganet-blue/40">
+              <span className="absolute -bottom-6 left-8 grid h-20 w-20 place-items-center rounded-3xl bg-gradient-to-br from-ganet-cyan to-ganet-blue text-ganet-ink shadow-2xl shadow-slate-900/10">
                 <Icono nombre={s.icono} className="h-9 w-9" />
               </span>
               <span className="absolute -top-16 right-2 -z-10 font-display text-9xl font-extrabold text-slate-200">0{i + 1}</span>
@@ -58,10 +58,9 @@ export default function Servicios() {
       </section>
 
       <section className="relative isolate overflow-hidden bg-ganet-ink py-24 text-white">
-        <div className="absolute inset-0 -z-10 bg-grid opacity-50" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <Reveal>
-            <Titulo etiqueta="Cómo trabajamos" centro oscuro>Un proceso claro de principio a fin</Titulo>
+            <Titulo etiqueta="Cómo trabajamos" centro oscuro>De la primera reunión al reporte mensual</Titulo>
           </Reveal>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {PROCESO.map(({ icono: I, titulo, texto }, i) => (

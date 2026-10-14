@@ -64,14 +64,12 @@ export function PageHeader({ titulo, subtitulo, etiqueta, imagen, children }) {
     <section className="relative isolate overflow-hidden bg-ganet-ink pb-24 pt-32 text-white lg:pb-28 lg:pt-40">
       {imagen && <img src={imagen} alt="" className="absolute inset-0 -z-20 h-full w-full animate-kenburns object-cover opacity-40" />}
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ganet-ink via-ganet-ink/90 to-ganet-ink/40" />
-      <div className="absolute inset-0 -z-10 bg-grid opacity-50" />
-      <div className="absolute -left-20 top-0 -z-10 h-72 w-72 animate-glow rounded-full bg-ganet-blue/15 blur-[100px]" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {etiqueta && (
-          <span className="inline-flex items-center gap-2 rounded-full border border-ganet-cyan/30 bg-ganet-cyan/10 px-3 py-1 text-xs font-medium text-ganet-cyan">
-            <span className="h-1.5 w-1.5 rounded-full bg-ganet-lime" />
+          <p className="flex items-center gap-3 text-sm font-medium text-ganet-sky">
+            <span className="h-px w-8 bg-current opacity-60" />
             {etiqueta}
-          </span>
+          </p>
         )}
         <h1 className="mt-5 max-w-3xl animate-fade-up font-display text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">{titulo}</h1>
         {subtitulo && <p className="mt-5 max-w-2xl animate-fade-up text-lg text-slate-300 [animation-delay:120ms]">{subtitulo}</p>}
@@ -87,7 +85,12 @@ export function PageHeader({ titulo, subtitulo, etiqueta, imagen, children }) {
 export function Titulo({ etiqueta, children, centro = false, oscuro = false, className = '' }) {
   return (
     <div className={`${centro ? 'mx-auto text-center' : ''} max-w-2xl ${className}`}>
-      {etiqueta && <p className={`text-sm font-semibold uppercase tracking-[0.2em] ${oscuro ? 'text-ganet-lime' : 'text-ganet-blue'}`}>{etiqueta}</p>}
+      {etiqueta && (
+        <p className={`flex items-center gap-3 text-sm font-medium ${centro ? 'justify-center' : ''} ${oscuro ? 'text-ganet-sky' : 'text-ganet-blue'}`}>
+          <span className="h-px w-8 bg-current opacity-60" />
+          {etiqueta}
+        </p>
+      )}
       <h2 className={`mt-3 font-display text-3xl font-bold sm:text-4xl ${oscuro ? 'text-white' : 'text-ganet-ink'}`}>{children}</h2>
     </div>
   )

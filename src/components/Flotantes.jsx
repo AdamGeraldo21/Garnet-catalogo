@@ -6,10 +6,9 @@ export function BotonWhatsapp() {
   return (
     <button
       onClick={() => abrirWhatsapp(EMPRESA.whatsapp, 'Hola Ganet, vengo de la página web.')}
-      className="boton-whatsapp group fixed bottom-5 right-5 z-30 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-xl shadow-[#25D366]/40 transition hover:scale-110"
+      className="boton-whatsapp group fixed bottom-5 right-5 z-30 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lg shadow-slate-900/20 transition hover:scale-110"
       aria-label="Escríbenos por WhatsApp"
     >
-      <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-25" />
       <MessageCircle className="relative h-6 w-6" />
       <span className="pointer-events-none absolute right-16 whitespace-nowrap rounded-full bg-ganet-ink px-3 py-1.5 text-xs font-medium opacity-0 shadow-lg transition group-hover:opacity-100">
         ¿Hablamos?

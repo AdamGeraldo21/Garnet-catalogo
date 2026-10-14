@@ -7,8 +7,7 @@ export default function VistaProducto({ producto, categoria, color, modo, classN
 
   if (usarMockup && producto.mockup) {
     return (
-      <div className={`relative grid h-full w-full place-items-center overflow-hidden bg-gradient-to-br from-slate-100 via-white to-sky-50 ${className}`}>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(34,189,250,.18),transparent_60%)]" />
+      <div className={`relative grid h-full w-full place-items-center overflow-hidden bg-[radial-gradient(ellipse_at_50%_28%,#ffffff_0%,#f1f3f6_55%,#e4e8ee_100%)] ${className}`}>
         <Mockup tipo={producto.mockup} color={color} {...personalizacion} className="relative h-[86%] w-[86%] transition duration-500 group-hover:-translate-y-1 group-hover:scale-105" />
       </div>
     )

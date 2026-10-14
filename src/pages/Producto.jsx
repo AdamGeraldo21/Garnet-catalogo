@@ -70,8 +70,6 @@ function Detalle({ producto }) {
     <>
       {/* Encabezado con la ruta y un brillo del color de la línea */}
       <section className="relative overflow-hidden bg-ganet-ink pb-8 pt-24 lg:pt-36">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full opacity-30 blur-3xl" style={{ background: categoria.acento }} />
         <nav className="relative mx-auto flex max-w-7xl flex-wrap items-center gap-1.5 px-4 text-sm sm:px-6" aria-label="Ruta">
           {[
             ['/', 'Inicio'],
@@ -229,7 +227,7 @@ function Detalle({ producto }) {
               </div>
 
               {/* Resumen y acciones */}
-              <div className="border-t border-slate-100 bg-gradient-to-br from-slate-50 to-sky-50/60 p-6 sm:px-8">
+              <div className="border-t border-slate-100 bg-slate-50 p-6 sm:px-8">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Tu selección</p>
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   <span className="rounded-full bg-ganet-ink px-3 py-1 text-xs font-semibold text-white">
@@ -243,7 +241,7 @@ function Detalle({ producto }) {
                   <button
                     onClick={agregarLista}
                     className={`group inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-2xl px-6 py-4 font-semibold shadow-lg transition ${
-                      agregado ? 'bg-ganet-lime text-white shadow-ganet-lime/30' : 'bg-gradient-to-r from-ganet-cyan to-ganet-blue text-white shadow-ganet-blue/25 hover:brightness-105'
+                      agregado ? 'bg-ganet-lime text-white shadow-slate-900/10' : 'bg-gradient-to-r from-ganet-cyan to-ganet-blue text-white shadow-slate-900/10 hover:brightness-105'
                     }`}
                   >
                     {agregado ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5 transition group-hover:rotate-90" />}
@@ -323,7 +321,7 @@ function Detalle({ producto }) {
 function Paso({ n, titulo, extra, children }) {
   return (
     <div className="relative pl-12">
-      <span className="absolute left-0 top-0 grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-ganet-cyan to-ganet-blue text-sm font-bold text-white shadow-md shadow-ganet-blue/20">
+      <span className="absolute left-0 top-0 grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-ganet-cyan to-ganet-blue text-sm font-bold text-white shadow-md shadow-slate-900/10">
         {n}
       </span>
       <p className="flex min-h-8 items-center text-sm font-semibold text-ganet-ink">

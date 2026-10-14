@@ -127,7 +127,7 @@ export default function Catalogo() {
                   ref={buscador}
                   value={busqueda}
                   onChange={(e) => actualizar({ q: e.target.value })}
-                  placeholder="Buscar resmas, polos, tazas, desinfectante…"
+                  placeholder="Buscar productos…"
                   className="w-full rounded-2xl border-0 bg-slate-100/80 py-3 pl-11 pr-20 text-sm transition placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-ganet-sky"
                 />
                 {busqueda ? (
@@ -143,7 +143,7 @@ export default function Catalogo() {
                 <button
                   onClick={() => actualizar({ personalizable: soloPersonalizables ? '' : '1' })}
                   className={`inline-flex items-center gap-2 rounded-2xl px-4 py-3 text-sm font-medium transition ${
-                    soloPersonalizables ? 'bg-ganet-ink text-white shadow-lg shadow-ganet-ink/20' : 'bg-slate-100/80 text-slate-600 hover:bg-slate-200/80'
+                    soloPersonalizables ? 'bg-ganet-ink text-white shadow-lg shadow-slate-900/10' : 'bg-slate-100/80 text-slate-600 hover:bg-slate-200/80'
                   }`}
                 >
                   <Palette className={`h-4 w-4 ${soloPersonalizables ? 'text-ganet-cyan' : ''}`} />
@@ -278,7 +278,6 @@ function Lateral({ categoria, conteo, total, elegir }) {
       </nav>
 
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#EAF4FB] to-[#EEF6E8] p-5 ring-1 ring-slate-200">
-        <span className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-ganet-sky/15 blur-xl" />
         <h3 className="relative font-display text-base font-bold text-ganet-ink">¿No encuentras lo que buscas?</h3>
         <p className="relative mt-1.5 text-sm leading-relaxed text-slate-600">Conseguimos productos que no están en el catálogo. Escríbenos y te cotizamos.</p>
         <button
@@ -336,7 +335,7 @@ function Pestanas({ categoria, conteo, total, elegir }) {
       <div ref={pista} onScroll={revisarBordes} className="no-scrollbar relative flex gap-1 overflow-x-auto">
         {ind && (
           <span
-            className="absolute top-0 h-11 rounded-2xl bg-ganet-ink shadow-lg shadow-ganet-ink/20 transition-all duration-300 ease-out"
+            className="absolute top-0 h-11 rounded-2xl bg-ganet-ink shadow-lg shadow-slate-900/10 transition-all duration-300 ease-out"
             style={{ left: ind.left, width: ind.width }}
           />
         )}
@@ -401,7 +400,7 @@ function Paginacion({ actual, total, ir }) {
               onClick={() => ir(n)}
               aria-current={n === actual ? 'page' : undefined}
               className={`grid h-11 min-w-11 place-items-center rounded-xl px-2 text-sm font-semibold transition ${
-                n === actual ? 'bg-gradient-to-br from-ganet-cyan to-ganet-blue text-ganet-ink shadow-lg shadow-ganet-blue/20' : 'text-slate-600 hover:bg-slate-100'
+                n === actual ? 'bg-gradient-to-br from-ganet-cyan to-ganet-blue text-ganet-ink shadow-lg shadow-slate-900/10' : 'text-slate-600 hover:bg-slate-100'
               }`}
             >
               {n}

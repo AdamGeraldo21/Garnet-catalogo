@@ -29,7 +29,6 @@ export default function CotizacionDrawer() {
 
       <aside className={`absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-white shadow-2xl transition-transform duration-300 ${abierta ? 'translate-x-0' : 'translate-x-full'}`}>
         <header className="relative overflow-hidden bg-ganet-ink px-6 py-5 text-white">
-          <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-ganet-blue/15 blur-2xl" />
           <div className="relative flex items-center justify-between">
             <div>
               <h2 className="flex items-center gap-2 font-display text-lg font-bold">

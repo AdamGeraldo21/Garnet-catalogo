@@ -44,7 +44,7 @@ export default function Nosotros() {
             <img src="./img/productos/st-01.webp" alt="" className="aspect-square w-full rounded-[2rem] object-cover shadow-xl" />
             <img src="./img/productos/po-02.webp" alt="" className="aspect-square w-full rounded-[2rem] object-cover shadow-xl" />
           </div>
-          <div className="absolute -bottom-6 left-1/2 grid h-24 w-24 -translate-x-1/2 animate-float-lento place-items-center rounded-3xl bg-ganet-ink shadow-2xl shadow-ganet-blue/20">
+          <div className="absolute -bottom-6 left-1/2 grid h-24 w-24 -translate-x-1/2 animate-float-lento place-items-center rounded-3xl bg-ganet-ink shadow-2xl shadow-slate-900/10">
             <img src={isotipo} alt="" className="h-14 w-auto" />
           </div>
         </Reveal>
@@ -73,7 +73,7 @@ export default function Nosotros() {
       <section className="bg-white py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <Reveal>
-            <Titulo etiqueta="Nuestros valores" centro>Lo que nos mueve</Titulo>
+            <Titulo etiqueta="Nuestros valores" centro>Cómo trabajamos con cada cliente</Titulo>
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {VALORES.map((v, i) => (
@@ -116,10 +116,9 @@ export default function Nosotros() {
       {/* Fundador */}
       <section className="px-4 pb-24 sm:px-6">
         <Reveal className="relative mx-auto grid max-w-5xl items-center gap-10 overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#EAF4FB] via-white to-[#EEF6E8] p-8 text-ganet-ink ring-1 ring-slate-200 sm:p-12 md:grid-cols-[auto_1fr]">
-          <div className="absolute inset-0 bg-grid opacity-60" />
           <div className="relative mx-auto grid h-40 w-40 place-items-center sm:h-48 sm:w-48">
             <span className="absolute inset-0 animate-orbit rounded-full border border-dashed border-ganet-sky/50" />
-            <span className="absolute inset-3 rounded-full bg-gradient-to-br from-ganet-cyan to-ganet-blue shadow-2xl shadow-ganet-blue/30" />
+            <span className="absolute inset-3 rounded-full bg-gradient-to-br from-ganet-cyan to-ganet-blue shadow-2xl shadow-slate-900/10" />
             <span className="relative font-display text-5xl font-extrabold tracking-tight text-white sm:text-6xl">
               {EMPRESA.ceo.split(' ').map((p) => p[0]).join('')}
             </span>

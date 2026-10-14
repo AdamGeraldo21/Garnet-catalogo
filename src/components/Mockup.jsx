@@ -249,6 +249,23 @@ const TIPOS = {
 
 export const TIPOS_MOCKUP = Object.keys(TIPOS)
 
+const PLIEGUES_CAMISETA = [
+  ['M138 150 Q150 250 132 360', false, 14],
+  ['M268 160 Q256 260 272 360', false, 12],
+  ['M205 120 Q222 240 198 360', true, 18],
+  ['M100 300 Q200 330 300 296', false, 10],
+  ['M70 120 Q90 150 96 190', true, 10],
+  ['M330 120 Q310 150 304 190', false, 10],
+]
+const PLIEGUES = {
+  camiseta: PLIEGUES_CAMISETA,
+  polo: PLIEGUES_CAMISETA,
+  camisa: PLIEGUES_CAMISETA,
+  delantal: [['M150 180 Q160 280 140 370', false, 14], ['M250 180 Q240 280 262 370', false, 12], ['M200 160 Q214 270 196 370', true, 18]],
+  bolsa: [['M140 170 Q150 270 130 365', false, 12], ['M255 170 Q246 270 268 365', true, 16]],
+  gorra: [['M90 220 Q140 130 220 118', true, 16], ['M250 150 Q290 200 300 255', false, 14]],
+}
+
 function luminancia(hex) {
   const n = parseInt(hex.replace('#', ''), 16)
   const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255]
@@ -271,6 +288,7 @@ export default function Mockup({ tipo, color = '#F8FAFC', logo, usarIsotipo = tr
   // El grabado láser se ve oscuro sobre superficies claras y plateado sobre las oscuras.
   const efecto = /bordado/i.test(tecnica) ? 'bordado' : /grabado/i.test(tecnica) ? (claro ? 'grabado-oscuro' : 'grabado-claro') : null
   const ancho = t.ancho || { x: 20, w: 360 }
+  const esTela = t.sombra === 'tela'
 
   return (
     <svg viewBox="0 0 400 400" className={className} role="img" aria-label={`Maqueta ${tipo}`}>
@@ -325,6 +343,17 @@ export default function Mockup({ tipo, color = '#F8FAFC', logo, usarIsotipo = tr
           <feColorMatrix type="matrix" values="0 0 0 0 .2  0 0 0 0 .23  0 0 0 0 .28  0 0 0 .85 0" result="grafito" />
           <feDropShadow in="grafito" dx="0" dy=".7" stdDeviation=".3" floodColor="#fff" floodOpacity=".7" />
         </filter>
+        <filter id={id('textura')} x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <filter id={id('suave')} x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="7" />
+        </filter>
+        <filter id={id('desplaza')} x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.018 0.03" numOctaves="2" seed="4" result="r" />
+          <feDisplacementMap in="SourceGraphic" in2="r" scale="4" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
         <clipPath id={id('clip')}>{t.forma}</clipPath>
       </defs>
 
@@ -333,31 +362,50 @@ export default function Mockup({ tipo, color = '#F8FAFC', logo, usarIsotipo = tr
       <g transform={t.transform}>
         {t.fondo?.(color)}
         <g fill={color} style={{ transition: 'fill .45s ease' }}>{t.forma}</g>
+
+        {/* Estampado: va debajo de la iluminación para que reciba las mismas luces y sombras */}
+        <g clipPath={`url(#${id('clip')})`}>
+          <g filter={esTela ? `url(#${id('desplaza')})` : undefined} style={{ mixBlendMode: esTela && claro ? 'multiply' : 'normal' }} opacity={esTela && !claro ? 0.94 : 1}>
+            <g filter={efecto ? `url(#${id(efecto)})` : undefined}>
+              {imagen && <image href={imagen} x={x} y={y} width={w} height={altoLogo} preserveAspectRatio="xMidYMid meet" />}
+              {hayTexto && (
+                <text
+                  x={x + w / 2}
+                  y={imagen ? y + altoLogo + tamTexto * 0.95 : y + h / 2 + tamTexto * 0.35}
+                  textAnchor="middle"
+                  fontFamily={`'${fuente}', sans-serif`}
+                  fontWeight="700"
+                  fontSize={tamTexto}
+                  fill={tinta}
+                >
+                  {texto}
+                </text>
+              )}
+            </g>
+          </g>
+        </g>
+
+        {/* Iluminación, textura y pliegues */}
         <g clipPath={`url(#${id('clip')})`}>
           {t.sombra === 'cilindro' && <rect x={ancho.x} y="0" width={ancho.w} height="400" fill={`url(#${id('cil')})`} />}
           {t.sombra === 'cilindroH' && <rect x="0" y="184" width="400" height="32" fill={`url(#${id('cilH')})`} />}
           {t.sombra === 'tela' && <rect width="400" height="400" fill={`url(#${id('tela')})`} />}
           {t.sombra === 'plano' && <rect width="400" height="400" fill={`url(#${id('plano')})`} />}
+          {esTela && (
+            <>
+              <rect width="400" height="400" filter={`url(#${id('textura')})`} opacity={claro ? 0.22 : 0.12} style={{ mixBlendMode: claro ? 'multiply' : 'screen' }} />
+              {PLIEGUES[tipo] && (
+                <g filter={`url(#${id('suave')})`} fill="none" strokeLinecap="round">
+                  {PLIEGUES[tipo].map(([d, luz, ancho], i) => (
+                    <path key={i} d={d} stroke={luz ? '#fff' : '#000'} strokeWidth={ancho} opacity={luz ? (claro ? 0.35 : 0.08) : claro ? 0.09 : 0.3} />
+                  ))}
+                </g>
+              )}
+            </>
+          )}
           {t.detalles}
         </g>
         {t.exterior?.(color)}
-
-        <g filter={efecto ? `url(#${id(efecto)})` : undefined} clipPath={`url(#${id('clip')})`}>
-          {imagen && <image href={imagen} x={x} y={y} width={w} height={altoLogo} preserveAspectRatio="xMidYMid meet" />}
-          {hayTexto && (
-            <text
-              x={x + w / 2}
-              y={imagen ? y + altoLogo + tamTexto * 0.95 : y + h / 2 + tamTexto * 0.35}
-              textAnchor="middle"
-              fontFamily={`'${fuente}', sans-serif`}
-              fontWeight="700"
-              fontSize={tamTexto}
-              fill={tinta}
-            >
-              {texto}
-            </text>
-          )}
-        </g>
       </g>
     </svg>
   )

@@ -31,7 +31,7 @@ const VENTAJAS = [
   { icono: 'Boxes', titulo: 'Un solo proveedor', texto: 'Oficina, limpieza, marca y contabilidad' },
   { icono: 'Palette', titulo: 'Con tu marca', texto: 'Bordado, serigrafía, sublimación y grabado' },
   { icono: 'Truck', titulo: 'Entrega a tu empresa', texto: 'Coordinamos el envío por ti' },
-  { icono: 'MessageCircle', titulo: 'Cotiza por WhatsApp', texto: 'Respuesta rápida y sin vueltas' },
+  { icono: 'MessageCircle', titulo: 'Cotiza por WhatsApp', texto: 'Envía tu lista y recibe precios' },
 ]
 
 function Cinta() {
@@ -137,8 +137,6 @@ function Destacados() {
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 py-24">
-      <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-ganet-cyan/10 blur-3xl" />
-      <div className="absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-ganet-lime/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
@@ -217,9 +215,6 @@ function PersonalizaEnVivo() {
 
   return (
     <section className="relative isolate overflow-hidden bg-ganet-ink py-24 text-white">
-      <div className="absolute inset-0 -z-10 bg-grid opacity-60" />
-      <div className="absolute -right-32 top-10 -z-10 h-[30rem] w-[30rem] rounded-full blur-[140px] transition-colors duration-700" style={{ background: `${color.hex}55` }} />
-      <div className="absolute -left-20 bottom-0 -z-10 h-80 w-80 rounded-full bg-ganet-blue/15 blur-[120px]" />
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2">
         <Reveal>
@@ -268,7 +263,7 @@ function PersonalizaEnVivo() {
 
           <Link
             to="/personaliza"
-            className="group mt-9 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-ganet-cyan to-ganet-blue px-6 py-3.5 font-semibold text-ganet-ink shadow-xl shadow-ganet-blue/20 transition hover:brightness-110"
+            className="group mt-9 inline-flex items-center gap-2 rounded-full bg-ganet-blue px-6 py-3.5 font-semibold text-white shadow-sm transition hover:bg-ganet-ink"
           >
             Abrir el estudio de personalización
             <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
@@ -277,10 +272,8 @@ function PersonalizaEnVivo() {
 
         <Reveal retraso={150} className="relative mx-auto aspect-square w-full max-w-lg">
           <div className="absolute inset-0 rounded-[3rem] border border-white/10 bg-white/5 backdrop-blur" />
-          <div className="absolute inset-6 rounded-[2.5rem] bg-gradient-to-br from-white to-slate-200" />
-          <div className="absolute inset-6 rounded-[2.5rem] bg-[radial-gradient(circle_at_50%_35%,rgba(34,189,250,.25),transparent_60%)]" />
+          <div className="absolute inset-6 rounded-[2.5rem] bg-[radial-gradient(ellipse_at_50%_28%,#ffffff_0%,#f1f3f6_55%,#e4e8ee_100%)]" />
           <Mockup key={tipo.tipo} tipo={tipo.tipo} color={color.hex} tecnica={tipo.tecnica} texto="TU MARCA" className="absolute inset-10 animate-fade-up" />
-          <span className="absolute right-2 top-10 rotate-6 sm:-right-3 rounded-2xl bg-ganet-lime px-4 py-2 text-sm font-bold text-ganet-ink shadow-xl">¡Pruébalo!</span>
         </Reveal>
       </div>
     </section>
@@ -323,12 +316,11 @@ function NosotrosTeaser() {
           <p className="text-xs text-slate-500">CEO & Founder</p>
           <p className="mt-3 text-sm text-slate-600">Al frente de un equipo que cuida cada detalle de tu empresa.</p>
         </div>
-        <div className="absolute -left-5 -top-5 h-24 w-24 rounded-3xl bg-gradient-to-br from-ganet-cyan to-ganet-lime opacity-80 blur-[2px]" />
       </Reveal>
 
       <Reveal retraso={120}>
         <Titulo etiqueta="Sobre nosotros">
-          Un aliado, <span className="text-gradient">todas las soluciones</span>
+          Un solo aliado para <span className="text-gradient">toda tu operación</span>
         </Titulo>
         <p className="mt-5 text-slate-600">
           En Ganet Soluciones Empresariales reunimos en un solo lugar lo que tu empresa necesita para operar: suministros, personalización de marca, productos de limpieza y servicios contables.
@@ -391,7 +383,7 @@ function ComoCotizar() {
     <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
       <Reveal>
         <Titulo etiqueta="Cómo cotizar" centro>
-          Tres pasos, cero complicaciones
+          Así pides tu cotización
         </Titulo>
       </Reveal>
       <ol className="relative mt-16 grid gap-12 md:grid-cols-3">
@@ -416,12 +408,10 @@ function LlamadoFinal() {
   return (
     <section className="px-4 pb-24 sm:px-6">
       <Reveal className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#E7F3FB] via-[#EAF7FA] to-[#EEF6E6] p-10 text-ganet-ink ring-1 ring-ganet-sky/20 sm:p-16">
-        <div className="absolute -right-16 -top-16 h-72 w-72 rounded-full bg-ganet-sky/15 blur-3xl" />
-        <div className="absolute -bottom-20 left-1/3 h-64 w-64 rounded-full bg-ganet-lime/15 blur-3xl" />
         <span className="pointer-events-none absolute -right-10 -top-24 select-none font-display text-[18rem] font-extrabold leading-none text-ganet-sky/10">G</span>
         <div className="relative max-w-2xl">
           <h2 className="font-display text-3xl font-extrabold sm:text-5xl">¿Listo para equipar tu empresa?</h2>
-          <p className="mt-4 text-lg text-slate-600">Arma tu cotización en minutos o escríbenos directamente. Te respondemos rápido.</p>
+          <p className="mt-4 text-lg text-slate-600">Arma tu lista en el catálogo o escríbenos con lo que necesitas y te enviamos precios y tiempos de entrega.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <button onClick={abrir} className="inline-flex items-center gap-2 rounded-full bg-ganet-ink px-6 py-3.5 font-semibold text-white transition hover:bg-ganet-night">
               <ClipboardList className="h-4 w-4" /> Ver mi cotización

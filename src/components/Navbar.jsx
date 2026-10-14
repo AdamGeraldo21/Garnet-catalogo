@@ -104,11 +104,11 @@ export default function Navbar() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={abrir}
-                  className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-ganet-cyan to-ganet-blue px-4 py-2.5 text-sm font-semibold text-ganet-ink shadow-lg shadow-ganet-blue/20 transition hover:shadow-ganet-cyan/50"
+                  className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-ganet-blue px-4 py-2.5 text-sm font-semibold text-ganet-ink shadow-lg shadow-slate-900/10 transition hover:shadow-slate-900/10"
                 >
                   <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                   <ClipboardList className="relative h-4 w-4" />
-                  <span className="relative hidden sm:inline">Mi cotización</span>
+                  <span className="relative hidden sm:inline lg:hidden xl:inline">Mi cotización</span>
                   {total > 0 && (
                     <span key={total} className="relative grid h-5 min-w-5 animate-fade-up place-items-center rounded-full bg-ganet-ink px-1.5 text-[11px] font-bold text-ganet-cyan">
                       {total}
@@ -190,7 +190,7 @@ function Enlaces({ pathname, menuAbierto, setMenu }) {
               setHover(l.to)
               setMenu(Boolean(l.menu))
             }}
-            className={`relative z-10 flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+            className={`relative z-10 flex items-center gap-1 rounded-full px-3 py-2 xl:px-4 text-sm font-medium transition-colors ${
               esActivo || hover === l.to ? 'text-white' : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -252,9 +252,6 @@ function MenuMovil({ abierto, cerrar, pathname }) {
   return (
     <div className={`fixed inset-0 z-50 lg:hidden ${abierto ? '' : 'pointer-events-none'}`} aria-hidden={!abierto}>
       <div className={`absolute inset-0 bg-ganet-ink transition-opacity duration-500 ${abierto ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="absolute inset-0 bg-grid opacity-40" />
-        <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-ganet-blue/15 blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-ganet-green/15 blur-3xl" />
       </div>
 
       <div className={`relative flex h-full flex-col px-5 pb-8 pt-4 transition-all duration-500 ${abierto ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
